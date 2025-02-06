@@ -1,10 +1,6 @@
-# Goatcast: A TweetDeck for Farcaster
-
-![Goatcast Logo](https://goatcast.app/logo.png)
+![Goatcast Logo](https://goatcast.app/images/goatcast-frames.png)
 
 Experience Farcaster like never before with multiple real-time feeds, powerful filtering, and a customizable interface designed for power users.
-
-![Goatcast Screenshot](https://goatcast.app/screenshot.png)
 
 Goatcast helps you keep track of everything happening on Farcaster.
 
