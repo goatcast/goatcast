@@ -8,7 +8,7 @@
             <sparkle:version>40</sparkle:version>
             <sparkle:shortVersionString>1.1.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/goatcast/goatcast/releases/download/prod/goatcast.dmg" length="16843257" type="application/octet-stream" sparkle:edSignature="AL87OjVCVurTDrcl20O1XE1DKVm462fEM6MX/hfopc61x4Ex9XHOi64dDy72RKSVgdEZzlE8kGGoEP5Rkn2GDg=="/>
+            <enclosure url="https://github.com/goatcast/goatcast/releases/download/prod/goatcast.dmg" length="16842515" type="application/octet-stream" sparkle:edSignature="vGGl0k9C1MTNq7++FVctptjNK6AQyCN9V9YLdzrkbkCKVJD9O1RAQs3IRV8J9j/fet99RSrHGtgBhrGxkqxeBg=="/>
         </item>
     </channel>
 </rss>
