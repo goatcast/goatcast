@@ -8,7 +8,6 @@ Like TweetDeck, you can create multiple columns to monitor different feeds, sear
 
 The clean, customizable interface makes it easy to stay engaged with your Farcaster community without feeling overwhelmed.
 
-[Download DMG](https://github.com/goatcast/goatcast/releases/download/06-feb/goatcast-06-Feb.dmg)  
-_Latest: Feb 06, 2025_
+[Download DMG](https://github.com/goatcast/goatcast/releases/download/prod/goatcast.dmg)  
 
 Need Help? Join us on Farcaster: [@goatcast](https://warpcast.com/goatcast)
