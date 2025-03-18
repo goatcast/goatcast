@@ -3,15 +3,15 @@
     <channel>
         <title>goatcast</title>
         <item>
-            <title>1.2.0</title>
-            <pubDate>Thu, 13 Mar 2025 18:13:25 +0700</pubDate>
-            <sparkle:version>49</sparkle:version>
-            <sparkle:shortVersionString>1.2.0</sparkle:shortVersionString>
+            <title>1.2.1</title>
+            <pubDate>Tue, 18 Mar 2025 18:13:25 +0700</pubDate>
+            <sparkle:version>50</sparkle:version>
+            <sparkle:shortVersionString>1.2.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/goatcast/goatcast/releases/download/prod/goatcast.dmg" 
-                      length="17743032" 
+                      length="17836880" 
                       type="application/octet-stream" 
-                      sparkle:edSignature="lEFPS+2ybRvIj7V/n8Oj2RjtCEKri0z1NPWlwpN+EiMUb4NeH629/Jf/QmdB9Qu8/MS+toP725oQ3K1y6hk4CA=="/>
+                      sparkle:edSignature="aZU3garzE+pHm1jaHevNkZteBBvS2oYsg3tvJdWTdbzmToX5O5n7QBLWibGE5M2igkjitihrqTifKlNTfTvKAA=="/>
         </item>
     </channel>
 </rss>
