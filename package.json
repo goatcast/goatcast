@@ -7,7 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && firebase deploy",
+    "deploy:hosting": "npm run build && firebase deploy --only hosting",
+    "deploy:firestore": "firebase deploy --only firestore:rules,firestore:indexes",
+    "firebase:login": "firebase login",
+    "firebase:init": "firebase init",
+    "firebase:emulate": "firebase emulators:start"
   },
   "dependencies": {
     "@farcaster/auth-kit": "^0.8.1",

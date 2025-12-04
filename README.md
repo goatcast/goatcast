@@ -102,11 +102,30 @@ The app uses the following Firestore collections:
 - ⚡ **Hot Module Replacement** - See changes instantly during development
 - 🔄 **Real-time Sync** - Live updates when desks and columns are modified
 
+### Deployment
+
+Deploy to Firebase Hosting with one command:
+
+```bash
+npm run deploy
+```
+
+See [FIREBASE_DEPLOYMENT.md](./FIREBASE_DEPLOYMENT.md) for complete deployment guide.
+
+**Your live app will be at:** `https://your-firebase-project-id.web.app`
+
 ### Technology Stack
 
 - **React 18** - UI library
 - **Vite 5** - Build tool and dev server
 - **Tailwind CSS 4** - Utility-first CSS framework
 - **@farcaster/auth-kit** - Farcaster authentication
-- **Firebase 10** - Real-time database and authentication
+- **Firebase 10** - Real-time database, Firestore, and Hosting
 - **Neynar API** - Farcaster data and feed management
+
+## Documentation
+
+- 📚 [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) - Firebase configuration guide
+- 🚀 [FIREBASE_DEPLOYMENT.md](./FIREBASE_DEPLOYMENT.md) - Deployment guide
+- 🔧 [FIREBASE_INDEX.md](./FIREBASE_INDEX.md) - Firestore indexes info
+- 🐛 [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Debugging guide
