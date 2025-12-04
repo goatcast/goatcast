@@ -33,7 +33,8 @@ export function Feed() {
 						key={cast.hash}
 						className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors duration-200"
 					>
-						{/* Author Info */}
+					{/* Author Info */}
+					{cast.author && (
 						<div className="flex items-center gap-3 mb-4">
 							{cast.author.pfp_url && (
 								<img
@@ -59,6 +60,7 @@ export function Feed() {
 								</p>
 							</div>
 						</div>
+					)}
 
 						{/* Cast Text */}
 						<p className="text-gray-100 mb-4 leading-relaxed whitespace-pre-wrap">
