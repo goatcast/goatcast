@@ -17,10 +17,10 @@ export default {
 					muted: 'var(--goatcast-muted)',
 					subTitle: 'var(--goatcast-sub-title)',
 					title: 'var(--goatcast-title)',
-					// Accent colors (same in both modes)
-					darkOrange: 'var(--goatcast-dark-orange)',
-					darkPurple: 'var(--goatcast-dark-purple)',
-					lightOrange: 'var(--goatcast-light-orange)',
+					// Accent colors - hardcoded since they're the same in both modes
+					darkOrange: '#FF4F00',
+					darkPurple: '#4D08A4',
+					lightOrange: '#F97316',
 				},
 			},
 		},
