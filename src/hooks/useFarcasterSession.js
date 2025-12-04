@@ -16,29 +16,37 @@ export function useFarcasterSession() {
 	const { signIn, signOut, isSignedIn } = useSignIn()
 	const { profile, isLoading } = useProfile()
 	const [isRestoringSession, setIsRestoringSession] = useState(true)
+	const [lastSavedFid, setLastSavedFid] = useState(null)
 
-	// Save session when user signs in successfully
+	// Save session when profile becomes available
+	// This works even if isSignedIn is not reliable
 	useEffect(() => {
-		if (isSignedIn && profile) {
-			try {
-				// Save the auth data to localStorage
-				const sessionData = {
-					fid: profile.fid,
-					username: profile.username,
-					displayName: profile.displayName,
-					pfpUrl: profile.pfpUrl,
-					bio: profile.bio,
-					followerCount: profile.followerCount,
-					followingCount: profile.followingCount,
-					signedInAt: new Date().toISOString(),
+		if (profile && profile.fid) {
+			// Only save if we haven't already saved this user
+			if (lastSavedFid !== profile.fid) {
+				try {
+					// Save the auth data to localStorage
+					const sessionData = {
+						fid: profile.fid,
+						username: profile.username,
+						displayName: profile.displayName,
+						pfpUrl: profile.pfpUrl,
+						bio: profile.bio || '',
+						followerCount: profile.followerCount || 0,
+						followingCount: profile.followingCount || 0,
+						signedInAt: new Date().toISOString(),
+					}
+					localStorage.setItem('farcaster-session-data', JSON.stringify(sessionData))
+					setLastSavedFid(profile.fid)
+					console.log('✅ Farcaster session saved to localStorage:', profile.username)
+					console.log('📍 Key: farcaster-session-data')
+					console.log('📊 Data:', sessionData)
+				} catch (error) {
+					console.error('❌ Error saving Farcaster session:', error)
 				}
-				localStorage.setItem('farcaster-session-data', JSON.stringify(sessionData))
-				console.log('✅ Farcaster session saved to localStorage')
-			} catch (error) {
-				console.error('❌ Error saving Farcaster session:', error)
 			}
 		}
-	}, [isSignedIn, profile])
+	}, [profile, lastSavedFid])
 
 	// Check for existing session on mount
 	useEffect(() => {

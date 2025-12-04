@@ -17,16 +17,25 @@ function App() {
 
 	// Load saved session data from localStorage on mount
 	useEffect(() => {
+		console.log('🔍 App mounted - checking localStorage for farcaster-session-data')
 		const saved = localStorage.getItem('farcaster-session-data')
+		
+		// Debug: Show all localStorage keys
+		const allKeys = Object.keys(localStorage)
+		console.log('📋 All localStorage keys:', allKeys)
+		console.log('📍 Looking for: farcaster-session-data')
+		
 		if (saved) {
 			try {
 				const sessionData = JSON.parse(saved)
 				setSavedSession(sessionData)
 				setCachedProfile(sessionData) // Use cached profile as fallback
-				console.log('📝 Loaded cached profile for:', sessionData.username)
+				console.log('✅ Loaded cached profile for:', sessionData.username)
 			} catch (error) {
-				console.error('Error loading saved session:', error)
+				console.error('❌ Error loading saved session:', error)
 			}
+		} else {
+			console.log('❌ No saved session found in localStorage')
 		}
 	}, [])
 
