@@ -50,12 +50,50 @@ Create a production build:
 npm run build
 ```
 
+### Firebase Setup
+
+1. Create a Firebase project at [firebase.google.com](https://firebase.google.com)
+2. Enable Firestore Database and Authentication in your Firebase project
+3. Add your Firebase configuration to `.env.local`:
+
+```bash
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+### Firebase Firestore Structure
+
+The app uses the following Firestore collections:
+
+**desks** - User's desk collections
+- `id` - Document ID
+- `name` - Desk name
+- `userId` - Farcaster user ID
+- `createdAt` - Timestamp
+- `updatedAt` - Timestamp
+
+**columns** - Columns within desks
+- `id` - Document ID
+- `deskId` - Reference to parent desk
+- `name` - Column name
+- `userId` - Farcaster user ID
+- `position` - Column order
+- `createdAt` - Timestamp
+- `updatedAt` - Timestamp
+
 ### Features
 
 - 🔐 **Farcaster Authentication** - Sign in with your Farcaster account using Auth Kit
-- 📺 **Trending Feed** - View trending casts from the Farcaster network in real-time
+- 📋 **Desk Management** - Create and organize multiple desks (groups of columns)
+- 📺 **Custom Columns** - Build multiple columns within each desk for different feeds
+- 💾 **Cloud Storage** - All desks and columns saved to Firebase Firestore
 - 🎨 **Modern UI** - Built with React, Tailwind CSS, and Vite for a fast, responsive experience
 - ⚡ **Hot Module Replacement** - See changes instantly during development
+- 🔄 **Real-time Sync** - Live updates when desks and columns are modified
 
 ### Technology Stack
 
@@ -63,4 +101,5 @@ npm run build
 - **Vite 5** - Build tool and dev server
 - **Tailwind CSS 4** - Utility-first CSS framework
 - **@farcaster/auth-kit** - Farcaster authentication
+- **Firebase 10** - Real-time database and authentication
 - **Neynar API** - Farcaster data and feed management
