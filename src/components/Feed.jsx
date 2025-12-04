@@ -33,34 +33,34 @@ export function Feed() {
 						key={cast.hash}
 						className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors duration-200"
 					>
-					{/* Author Info */}
-					{cast.author && (
-						<div className="flex items-center gap-3 mb-4">
-							{cast.author.pfp_url && (
-								<img
-									src={cast.author.pfp_url}
-									alt={cast.author.username}
-									className="w-10 h-10 rounded-full"
-								/>
-							)}
-							<div className="flex-1">
-								<div className="flex items-center gap-2">
-									<p className="text-white font-semibold">
-										{cast.author.display_name || cast.author.username}
+						{/* Author Info */}
+						{cast.author && (
+							<div className="flex items-center gap-3 mb-4">
+								{cast.author.pfp_url && (
+									<img
+										src={cast.author.pfp_url}
+										alt={cast.author.username}
+										className="w-10 h-10 rounded-full"
+									/>
+								)}
+								<div className="flex-1">
+									<div className="flex items-center gap-2">
+										<p className="text-white font-semibold">
+											{cast.author.display_name || cast.author.username}
+										</p>
+										<p className="text-gray-500">@{cast.author.username}</p>
+									</div>
+									<p className="text-gray-500 text-sm">
+										{new Date(cast.timestamp).toLocaleDateString('en-US', {
+											month: 'short',
+											day: 'numeric',
+											hour: '2-digit',
+											minute: '2-digit',
+										})}
 									</p>
-									<p className="text-gray-500">@{cast.author.username}</p>
 								</div>
-								<p className="text-gray-500 text-sm">
-									{new Date(cast.timestamp).toLocaleDateString('en-US', {
-										month: 'short',
-										day: 'numeric',
-										hour: '2-digit',
-										minute: '2-digit',
-									})}
-								</p>
 							</div>
-						</div>
-					)}
+						)}
 
 						{/* Cast Text */}
 						<p className="text-gray-100 mb-4 leading-relaxed whitespace-pre-wrap">
@@ -112,4 +112,3 @@ export function Feed() {
 }
 
 export default Feed
-
