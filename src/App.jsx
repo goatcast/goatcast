@@ -32,7 +32,7 @@ function App() {
                   {profile.pfpUrl && (
                     <img
                       src={profile.pfpUrl}
-                      alt={profile.displayName}
+                      alt={profile.displayName || profile.username || 'User avatar'}
                       className="w-10 h-10 rounded-full"
                     />
                   )}

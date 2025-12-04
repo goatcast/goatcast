@@ -2,7 +2,7 @@ import { useSignIn, useProfile } from '@farcaster/auth-kit';
 
 export function useFarcasterAuth() {
   const { signIn, isSignedIn, isLoading } = useSignIn();
-  const { profile, isLoadingProfile } = useProfile();
+  const { profile, isLoading: isLoadingProfile } = useProfile();
 
   return {
     signIn,
