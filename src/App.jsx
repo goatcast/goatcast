@@ -1,13 +1,14 @@
 import { useState } from 'react'
+import { useProfile } from '@farcaster/auth-kit'
 import { SignInButton } from '@farcaster/auth-kit'
 import '@farcaster/auth-kit/styles.css'
-import { useUserSession } from './hooks/useUserSession'
-import LogoutButton from './components/LogoutButton'
 import Sidebar from './components/Sidebar'
 import DeskView from './components/DeskView'
+import { useUserStorage } from './hooks/useUserStorage'
 
 function App() {
-	const { profile, isLoading, isCached, hasCachedProfile } = useUserSession()
+	const { isLoading, profile } = useProfile()
+	useUserStorage() // This saves user data to Firebase on login
 	const [selectedDesk, setSelectedDesk] = useState(null)
 
 	// Show sign in page if not authenticated
@@ -28,11 +29,6 @@ function App() {
 						</div>
 					) : (
 						<div>
-							{hasCachedProfile && (
-								<p className="text-blue-400 mb-4 text-center text-sm bg-blue-900 bg-opacity-30 px-3 py-2 rounded border border-blue-700">
-									✓ Welcome back! Using saved session
-								</p>
-							)}
 							<p className="text-gray-400 mb-4 text-center">
 								Sign in with your Farcaster account to get started
 							</p>
@@ -54,28 +50,25 @@ function App() {
 
 			{/* Main Content */}
 			<div className="flex-1 flex flex-col">
-			{/* Top Bar with User Info */}
-			<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
-				<div className="flex items-center gap-3">
-					{profile.pfpUrl && (
-						<img
-							src={profile.pfpUrl}
-							alt={profile.displayName || profile.username || 'User avatar'}
-							className="w-10 h-10 rounded-full"
-						/>
-					)}
-					<div>
-						<p className="text-white font-semibold">
-							{profile.displayName || profile.username}
-						</p>
-						<p className="text-gray-400 text-sm">@{profile.username}</p>
+				{/* Top Bar with User Info */}
+				<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
+					<div className="flex items-center gap-3">
+						{profile.pfpUrl && (
+							<img
+								src={profile.pfpUrl}
+								alt={profile.displayName || profile.username || 'User avatar'}
+								className="w-10 h-10 rounded-full"
+							/>
+						)}
+						<div>
+							<p className="text-white font-semibold">
+								{profile.displayName || profile.username}
+							</p>
+							<p className="text-gray-400 text-sm">@{profile.username}</p>
+						</div>
 					</div>
-				</div>
-				<div className="flex items-center gap-2">
 					<SignInButton />
-					<LogoutButton />
 				</div>
-			</div>
 
 				{/* Desk Content Area */}
 				<DeskView desk={selectedDesk} />
