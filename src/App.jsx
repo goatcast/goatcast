@@ -5,11 +5,30 @@ import '@farcaster/auth-kit/styles.css'
 import Sidebar from './components/Sidebar'
 import DeskView from './components/DeskView'
 import { useUserStorage } from './hooks/useUserStorage'
+import { useAuthRestore } from './hooks/useAuthRestore'
 
 function App() {
 	const { isLoading, profile } = useProfile()
+	const isAuthRestoring = useAuthRestore() // Track auth restoration on page reload
 	useUserStorage() // This saves user data to Firebase on login
 	const [selectedDesk, setSelectedDesk] = useState(null)
+
+	// Show splash screen while auth is being restored from localStorage after page reload
+	if (isAuthRestoring) {
+		return (
+			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
+				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
+					<div className="text-center mb-8">
+						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
+					</div>
+					<div className="flex justify-center">
+						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+					</div>
+					<p className="text-gray-400 text-center mt-6 text-sm">Restoring your session...</p>
+				</div>
+			</div>
+		)
+	}
 
 	// Show sign in page if not authenticated
 	if (!profile || isLoading) {

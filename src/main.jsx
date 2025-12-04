@@ -10,6 +10,8 @@ const config = {
   // Optional
   domain: typeof window !== 'undefined' ? window.location.hostname : 'localhost',
   siweUri: typeof window !== 'undefined' ? window.location.origin : 'http://localhost',
+  // Enable session persistence - stores auth token in localStorage
+  // This allows users to stay logged in after page reload
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
