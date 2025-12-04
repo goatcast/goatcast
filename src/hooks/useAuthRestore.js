@@ -4,29 +4,27 @@ import { useProfile } from '@farcaster/auth-kit'
 /**
  * Hook to handle authentication restoration after page reload
  * 
- * When a user reloads the page:
- * 1. The auth state is restored from localStorage (handled by @farcaster/auth-kit)
- * 2. useProfile() returns isLoading=true while restoring
- * 3. This hook tracks the restore process
- * 4. Returns isRestoring flag to prevent UI flickering
+ * Tracks if we're waiting for auth to be restored from localStorage on initial page load
  * 
- * @returns {boolean} isRestoring - true while auth is being restored from localStorage
+ * @returns {boolean} isRestoring - true while checking for stored auth on initial load
  */
 export function useAuthRestore() {
 	const { isLoading, profile } = useProfile()
-	const [isRestoring, setIsRestoring] = useState(true)
+	const [hasCheckedAuth, setHasCheckedAuth] = useState(false)
 
 	useEffect(() => {
-		// Auth restoration happens in two scenarios:
-		// 1. Page load - auth state restored from localStorage (isLoading=true)
-		// 2. User interaction - new auth (isLoading=false, profile exists)
-		
-		// If profile loaded or auth finished loading, we're done restoring
-		if (!isLoading) {
-			setIsRestoring(false)
+		// Mark that we've done the initial auth check
+		// This happens after the first render when isLoading reflects actual state
+		if (!hasCheckedAuth) {
+			// Give it a moment for auth to be checked
+			const timer = setTimeout(() => {
+				setHasCheckedAuth(true)
+			}, 500)
+			return () => clearTimeout(timer)
 		}
-	}, [isLoading])
+	}, [hasCheckedAuth])
 
-	return isRestoring
+	// Return true only while we're on initial page load before first auth check completes
+	return !hasCheckedAuth
 }
 
