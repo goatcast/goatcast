@@ -1,6 +1,2 @@
 @import "tailwindcss";
 
-@tailwindcss config {
-  content: ["./index.html", "./src/**/*.{js,jsx}"];
-}
-
