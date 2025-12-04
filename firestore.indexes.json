@@ -1,34 +1,33 @@
 {
-  "indexes": [
-    {
-      "collectionGroup": "desks",
-      "queryScope": "Collection",
-      "fields": [
-        {
-          "fieldPath": "userId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "createdAt",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "columns",
-      "queryScope": "Collection",
-      "fields": [
-        {
-          "fieldPath": "deskId",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "position",
-          "order": "ASCENDING"
-        }
-      ]
-    }
-  ],
-  "fieldOverrides": []
+	"indexes": [
+		{
+			"collectionGroup": "desks",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "userId",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "createdAt",
+					"order": "DESCENDING"
+				}
+			]
+		},
+		{
+			"collectionGroup": "columns",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "deskId",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "position",
+					"order": "ASCENDING"
+				}
+			]
+		}
+	],
+	"fieldOverrides": []
 }
-

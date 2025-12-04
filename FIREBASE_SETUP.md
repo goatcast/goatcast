@@ -23,13 +23,13 @@ The most common reason is that **Firebase is not configured**. Follow these step
 
 ```javascript
 const firebaseConfig = {
-  apiKey: "AIza...",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
-};
+	apiKey: 'AIza...',
+	authDomain: 'your-project.firebaseapp.com',
+	projectId: 'your-project-id',
+	storageBucket: 'your-project.appspot.com',
+	messagingSenderId: '123456789',
+	appId: '1:123456789:web:abcdef123456',
+}
 ```
 
 ## Step 3: Enable Firestore Database
@@ -92,6 +92,7 @@ service cloud.firestore {
 ### Note on Firebase Indexes
 
 The app has been optimized to avoid requiring composite indexes. If you see an "index required" error:
+
 - Just refresh the page (Cmd+R or Ctrl+F5)
 - The app will work without creating any indexes
 
@@ -113,20 +114,24 @@ See [FIREBASE_INDEX.md](./FIREBASE_INDEX.md) for more details.
 ### Common Errors
 
 **"User not authenticated"**
+
 - Make sure you're signed in with Farcaster
 - The Farcaster sign-in must happen before trying to create a desk
 
 **"Firebase config is incomplete"**
+
 - Check that `.env.local` has all Firebase config values
 - Don't put quotes around the values
 - Restart your dev server after adding `.env.local`
 
 **"Permission denied" error**
+
 - Go to Firestore → Rules
 - Make sure your rules allow authenticated users
 - Copy the rules from Step 5 above
 
 **"Collection not created"**
+
 - This is normal! Collections auto-create when you add the first document
 - Just create your first desk and it will automatically create the "desks" collection
 
@@ -143,6 +148,7 @@ console.log('Firebase db:', db)
 ## Next Steps
 
 Once desks are working:
+
 1. Create a desk (e.g., "Trending")
 2. Select it from the sidebar
 3. Click "New Column" to add columns
@@ -157,4 +163,3 @@ Once desks are working:
 - Double-check Firebase credentials in `.env.local`
 
 Happy desk organizing! 🐐
-
