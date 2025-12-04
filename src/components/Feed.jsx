@@ -6,14 +6,14 @@ export function Feed() {
 	if (loading) {
 		return (
 			<div className="flex justify-center items-center py-12">
-				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-goatcast-darkOrange"></div>
+				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 			</div>
 		)
 	}
 
 	if (error) {
 		return (
-			<div className="bg-goatcast-darkOrange bg-opacity-20 border border-goatcast-darkOrange text-goatcast-darkOrange px-4 py-3 rounded-lg mb-6">
+			<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6">
 				<p className="font-semibold">Error loading feed</p>
 				<p className="text-sm">{error}</p>
 			</div>
@@ -22,18 +22,16 @@ export function Feed() {
 
 	return (
 		<div className="space-y-4">
-			<h2 className="text-2xl font-bold text-goatcast-title mb-6">
-				Trending Feed
-			</h2>
+			<h2 className="text-2xl font-bold text-white mb-6">Trending Feed</h2>
 			{casts.length === 0 ? (
-				<div className="text-center text-goatcast-muted py-8">
+				<div className="text-center text-gray-400 py-8">
 					<p>No casts found</p>
 				</div>
 			) : (
 				casts.map((cast) => (
 					<div
 						key={cast.hash}
-						className="bg-goatcast-hover rounded-lg shadow-lg p-6 border border-goatcast-border hover:border-goatcast-lightOrange transition-colors duration-200"
+						className="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors duration-200"
 					>
 						{/* Author Info */}
 						{cast.author && (
@@ -47,14 +45,12 @@ export function Feed() {
 								)}
 								<div className="flex-1">
 									<div className="flex items-center gap-2">
-										<p className="text-goatcast-title font-semibold">
+										<p className="text-white font-semibold">
 											{cast.author.display_name || cast.author.username}
 										</p>
-										<p className="text-goatcast-subTitle">
-											@{cast.author.username}
-										</p>
+										<p className="text-gray-500">@{cast.author.username}</p>
 									</div>
-									<p className="text-goatcast-muted text-sm">
+									<p className="text-gray-500 text-sm">
 										{new Date(cast.timestamp).toLocaleDateString('en-US', {
 											month: 'short',
 											day: 'numeric',
@@ -67,7 +63,7 @@ export function Feed() {
 						)}
 
 						{/* Cast Text */}
-						<p className="text-goatcast-base mb-4 leading-relaxed whitespace-pre-wrap">
+						<p className="text-gray-100 mb-4 leading-relaxed whitespace-pre-wrap">
 							{cast.text}
 						</p>
 
@@ -82,7 +78,7 @@ export function Feed() {
 												href={embed.url}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="block text-goatcast-lightOrange hover:underline truncate"
+												className="block text-blue-400 hover:underline truncate"
 											>
 												{embed.url}
 											</a>
@@ -94,16 +90,16 @@ export function Feed() {
 						)}
 
 						{/* Reactions Footer */}
-						<div className="flex items-center gap-6 text-goatcast-muted text-sm pt-4 border-t border-goatcast-border">
-							<button className="flex items-center gap-2 hover:text-goatcast-lightOrange transition-colors">
+						<div className="flex items-center gap-6 text-gray-400 text-sm pt-4 border-t border-gray-700">
+							<button className="flex items-center gap-2 hover:text-gray-300 transition-colors">
 								<span>💬</span>
 								<span>{cast.replies?.count || 0}</span>
 							</button>
-							<button className="flex items-center gap-2 hover:text-goatcast-lightOrange transition-colors">
+							<button className="flex items-center gap-2 hover:text-gray-300 transition-colors">
 								<span>🔄</span>
 								<span>{cast.reactions?.recasts_count || 0}</span>
 							</button>
-							<button className="flex items-center gap-2 hover:text-goatcast-lightOrange transition-colors">
+							<button className="flex items-center gap-2 hover:text-gray-300 transition-colors">
 								<span>❤️</span>
 								<span>{cast.reactions?.likes_count || 0}</span>
 							</button>
