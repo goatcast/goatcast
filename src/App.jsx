@@ -47,8 +47,8 @@ function App() {
 		}
 	}, [profile])
 
-	// Show loading screen if auth is still being determined
-	if (isLoading || isRestoringSession) {
+	// Show loading screen only if actively loading auth (not just checking for cached)
+	if (isLoading) {
 		return (
 			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
@@ -58,7 +58,7 @@ function App() {
 					<div className="flex justify-center">
 						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 					</div>
-					<p className="text-gray-400 text-center mt-6 text-sm">Loading your session...</p>
+					<p className="text-gray-400 text-center mt-6 text-sm">Loading...</p>
 				</div>
 			</div>
 		)
@@ -67,6 +67,7 @@ function App() {
 	// If user has a cached profile but isn't currently authenticated, show cached view
 	// This allows users to see their app while re-authenticating
 	if (!profile && cachedProfile) {
+		console.log('📱 Showing cached profile view for:', cachedProfile.username)
 		return (
 			<div className="flex h-screen bg-gray-900">
 				{/* Sidebar with cached data */}

@@ -54,20 +54,22 @@ export function useFarcasterSession() {
 			try {
 				const savedSession = localStorage.getItem('farcaster-session-data')
 				
-				// Wait a moment for auth-kit to initialize
-				await new Promise(resolve => setTimeout(resolve, 500))
-				
-				if (savedSession && !isSignedIn && !isLoading) {
+				// Just check quickly if we have a saved session
+				if (savedSession) {
 					try {
 						const sessionData = JSON.parse(savedSession)
 						console.log('✅ Found existing session for:', sessionData.username)
-						console.log('📝 Session will be restored when user interacts with auth')
+						console.log('📝 Session restored from localStorage')
 					} catch (error) {
 						console.error('❌ Error parsing saved session:', error)
 						localStorage.removeItem('farcaster-session-data')
 					}
+				} else {
+					console.log('📝 No saved session found')
 				}
 				
+				// Don't wait, just mark as done immediately
+				// The isLoading flag will show the actual loading state
 				setIsRestoringSession(false)
 			} catch (error) {
 				console.error('❌ Error checking session:', error)
@@ -76,7 +78,7 @@ export function useFarcasterSession() {
 		}
 
 		checkExistingSession()
-	}, [isSignedIn, isLoading])
+	}, [])
 
 	// Clear session on sign out
 	useEffect(() => {
