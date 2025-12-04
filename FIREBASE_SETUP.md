@@ -89,6 +89,14 @@ service cloud.firestore {
 6. **Open the browser console (F12)** to see debug logs
 7. If you see errors, they'll show up in the console
 
+### Note on Firebase Indexes
+
+The app has been optimized to avoid requiring composite indexes. If you see an "index required" error:
+- Just refresh the page (Cmd+R or Ctrl+F5)
+- The app will work without creating any indexes
+
+See [FIREBASE_INDEX.md](./FIREBASE_INDEX.md) for more details.
+
 ## Troubleshooting
 
 ### Still nothing happens when I click "Create Desk"?

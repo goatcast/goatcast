@@ -28,11 +28,11 @@ export function useColumns(deskId) {
 		}
 
 		const columnsRef = collection(db, 'columns')
+		// Query by deskId first, then filter by userId in JavaScript
+		// This avoids needing a composite index
 		const q = query(
 			columnsRef,
-			where('deskId', '==', deskId),
-			where('userId', '==', profile.fid.toString()),
-			orderBy('position', 'asc')
+			where('deskId', '==', deskId)
 		)
 
 		const unsubscribe = onSnapshot(
@@ -40,11 +40,17 @@ export function useColumns(deskId) {
 			(snapshot) => {
 				const columnsData = []
 				snapshot.forEach((doc) => {
-					columnsData.push({
-						id: doc.id,
-						...doc.data(),
-					})
+					const data = doc.data()
+					// Only include columns for current user
+					if (data.userId === profile.fid.toString()) {
+						columnsData.push({
+							id: doc.id,
+							...data,
+						})
+					}
 				})
+				// Sort by position
+				columnsData.sort((a, b) => (a.position || 0) - (b.position || 0))
 				setColumns(columnsData)
 				setLoading(false)
 			},
