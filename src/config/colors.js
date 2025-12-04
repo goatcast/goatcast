@@ -3,6 +3,11 @@
  * Converted from iOS color sets to web-friendly formats
  * 
  * Colors support both light and dark modes
+ * 
+ * Usage in components:
+ * - Import { colors, getColor } from './config/colors'
+ * - Use getColor('colorName', 'dark' | 'light') to get colors
+ * - Or use Tailwind classes: bg-goatcast-*, text-goatcast-*
  */
 
 export const colors = {

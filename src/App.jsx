@@ -4,6 +4,7 @@ import { SignInButton } from '@farcaster/auth-kit'
 import '@farcaster/auth-kit/styles.css'
 import Sidebar from './components/Sidebar'
 import DeskView from './components/DeskView'
+import ThemeToggle from './components/ThemeToggle'
 
 function App() {
 	const { isLoading, profile } = useProfile()
@@ -15,7 +16,9 @@ function App() {
 			<div className="min-h-screen bg-goatcast-background flex items-center justify-center p-4">
 				<div className="bg-goatcast-highlight rounded-lg shadow-2xl p-8 sm:p-12 border border-goatcast-border max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-goatcast-title mb-4">🐐 Goatcast</h1>
+						<h1 className="text-5xl font-bold text-goatcast-title mb-4">
+							🐐 Goatcast
+						</h1>
 						<p className="text-xl text-goatcast-muted mb-6">
 							Organize your Farcaster feeds with custom desks
 						</p>
@@ -65,7 +68,10 @@ function App() {
 							<p className="text-goatcast-muted text-sm">@{profile.username}</p>
 						</div>
 					</div>
-					<SignInButton />
+					<div className="flex items-center gap-4">
+						<ThemeToggle />
+						<SignInButton />
+					</div>
 				</div>
 
 				{/* Desk Content Area */}

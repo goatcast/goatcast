@@ -1,1 +1,39 @@
 @import 'tailwindcss';
+
+/* Apply color scheme based on theme */
+html {
+	@apply transition-colors duration-300 ease-in-out;
+}
+
+html:not(.dark) {
+	/* Light mode color variables */
+	--goatcast-background: #FAFAFA;
+	--goatcast-base: #FFFFFF;
+	--goatcast-base-reverse: #FFFFFF;
+	--goatcast-border: #F3F3F3;
+	--goatcast-highlight: #EEF0F4;
+	--goatcast-hover: #FBFBFB;
+	--goatcast-muted: #848484;
+	--goatcast-sub-title: #4B4744;
+	--goatcast-title: #0F1414;
+}
+
+html.dark {
+	/* Dark mode color variables (default) */
+	--goatcast-background: #121212;
+	--goatcast-base: #000000;
+	--goatcast-base-reverse: #000000;
+	--goatcast-border: #1E1E1E;
+	--goatcast-highlight: #242424;
+	--goatcast-hover: #090909;
+	--goatcast-muted: #727272;
+	--goatcast-sub-title: #ACACAC;
+	--goatcast-title: #FFFFFF;
+}
+
+/* Accent colors (same in both modes) */
+:root {
+	--goatcast-dark-orange: #FF4F00;
+	--goatcast-dark-purple: #4D08A4;
+	--goatcast-light-orange: #F97316;
+}

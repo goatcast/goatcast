@@ -22,7 +22,9 @@ export function Feed() {
 
 	return (
 		<div className="space-y-4">
-			<h2 className="text-2xl font-bold text-goatcast-title mb-6">Trending Feed</h2>
+			<h2 className="text-2xl font-bold text-goatcast-title mb-6">
+				Trending Feed
+			</h2>
 			{casts.length === 0 ? (
 				<div className="text-center text-goatcast-muted py-8">
 					<p>No casts found</p>
@@ -48,7 +50,9 @@ export function Feed() {
 										<p className="text-goatcast-title font-semibold">
 											{cast.author.display_name || cast.author.username}
 										</p>
-										<p className="text-goatcast-subTitle">@{cast.author.username}</p>
+										<p className="text-goatcast-subTitle">
+											@{cast.author.username}
+										</p>
 									</div>
 									<p className="text-goatcast-muted text-sm">
 										{new Date(cast.timestamp).toLocaleDateString('en-US', {

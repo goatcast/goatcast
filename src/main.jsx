@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { AuthKitProvider } from '@farcaster/auth-kit'
+import { ThemeProvider } from './context/ThemeContext'
 import App from './App.jsx'
 import './index.css'
 
@@ -14,9 +15,11 @@ const config = {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthKitProvider config={config}>
-      <App />
-    </AuthKitProvider>
+    <ThemeProvider>
+      <AuthKitProvider config={config}>
+        <App />
+      </AuthKitProvider>
+    </ThemeProvider>
   </React.StrictMode>,
 )
 
