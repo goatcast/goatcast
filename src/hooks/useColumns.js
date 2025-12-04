@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { db, auth } from '../config/firebase'
+import { useProfile } from '@farcaster/auth-kit'
+import { db } from '../config/firebase'
 import {
 	collection,
 	query,
@@ -13,13 +14,14 @@ import {
 } from 'firebase/firestore'
 
 export function useColumns(deskId) {
+	const { profile } = useProfile()
 	const [columns, setColumns] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	// Fetch columns for specific desk
 	useEffect(() => {
-		if (!deskId || !auth.currentUser) {
+		if (!deskId || !profile?.fid) {
 			setColumns([])
 			setLoading(false)
 			return
@@ -29,7 +31,7 @@ export function useColumns(deskId) {
 		const q = query(
 			columnsRef,
 			where('deskId', '==', deskId),
-			where('userId', '==', auth.currentUser.uid),
+			where('userId', '==', profile.fid.toString()),
 			orderBy('position', 'asc')
 		)
 
@@ -47,13 +49,14 @@ export function useColumns(deskId) {
 				setLoading(false)
 			},
 			(err) => {
+				console.error('Error fetching columns:', err)
 				setError(err.message)
 				setLoading(false)
 			}
 		)
 
 		return () => unsubscribe()
-	}, [deskId])
+	}, [deskId, profile?.fid])
 
 	// Update column
 	const updateColumn = async (columnId, data) => {

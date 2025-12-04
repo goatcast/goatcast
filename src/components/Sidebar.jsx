@@ -11,10 +11,12 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 
 	const handleCreateDesk = async (name) => {
 		try {
-			await createDesk(name)
-			setShowCreateDeskModal(false)
+			console.log('Sidebar: Creating desk with name:', name)
+			const deskId = await createDesk(name)
+			console.log('Sidebar: Desk created with ID:', deskId)
 		} catch (err) {
-			console.error('Failed to create desk:', err)
+			console.error('Sidebar: Failed to create desk:', err)
+			throw err
 		}
 	}
 

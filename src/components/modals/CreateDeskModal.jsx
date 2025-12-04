@@ -15,11 +15,16 @@ export function CreateDeskModal({ isOpen, onClose, onCreate }) {
 		setLoading(true)
 		setError('')
 		try {
+			console.log('Creating desk with name:', deskName)
 			await onCreate(deskName.trim())
+			console.log('Desk created successfully')
 			setDeskName('')
+			setTimeout(() => {
+				onClose()
+			}, 500)
 		} catch (err) {
-			setError(err.message || 'Failed to create desk')
-		} finally {
+			console.error('Failed to create desk:', err)
+			setError(err.message || 'Failed to create desk. Check your Firebase config and make sure you are signed in.')
 			setLoading(false)
 		}
 	}

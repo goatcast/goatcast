@@ -8,7 +8,7 @@ Like TweetDeck, you can create multiple columns to monitor different feeds, sear
 
 The clean, customizable interface makes it easy to stay engaged with your Farcaster community without feeling overwhelmed.
 
-[Download DMG](https://github.com/goatcast/goatcast/releases/download/prod/goatcast.dmg)  
+[Download DMG](https://github.com/goatcast/goatcast/releases/download/prod/goatcast.dmg)
 
 Need Help? Join us on Farcaster: [@goatcast](https://warpcast.com/goatcast)
 
@@ -17,17 +17,20 @@ Need Help? Join us on Farcaster: [@goatcast](https://warpcast.com/goatcast)
 ## Goatcast Web - Setup & Development
 
 ### Prerequisites
+
 - Node.js (v16+)
 - npm or yarn
 
 ### Installation
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Create a `.env.local` file with your Neynar API key:
+
 ```bash
 VITE_NEYNAR_API_KEY=your_neynar_api_key_here
 ```
@@ -37,6 +40,7 @@ Get your free API key from [Neynar API Documentation](https://docs.neynar.com/)
 ### Development
 
 Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -46,6 +50,7 @@ The app will open at `http://localhost:3000` with hot module replacement enabled
 ### Build
 
 Create a production build:
+
 ```bash
 npm run build
 ```
@@ -70,6 +75,7 @@ VITE_FIREBASE_APP_ID=your_app_id
 The app uses the following Firestore collections:
 
 **desks** - User's desk collections
+
 - `id` - Document ID
 - `name` - Desk name
 - `userId` - Farcaster user ID
@@ -77,6 +83,7 @@ The app uses the following Firestore collections:
 - `updatedAt` - Timestamp
 
 **columns** - Columns within desks
+
 - `id` - Document ID
 - `deskId` - Reference to parent desk
 - `name` - Column name

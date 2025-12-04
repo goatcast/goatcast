@@ -15,9 +15,7 @@ function App() {
 			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-white mb-4">
-							🐐 Goatcast
-						</h1>
+						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
 						<p className="text-xl text-gray-300 mb-6">
 							Organize your Farcaster feeds with custom desks
 						</p>
@@ -64,9 +62,7 @@ function App() {
 							<p className="text-white font-semibold">
 								{profile.displayName || profile.username}
 							</p>
-							<p className="text-gray-400 text-sm">
-								@{profile.username}
-							</p>
+							<p className="text-gray-400 text-sm">@{profile.username}</p>
 						</div>
 					</div>
 					<SignInButton />

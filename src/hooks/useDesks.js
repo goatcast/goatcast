@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { db, auth } from '../config/firebase'
+import { useProfile } from '@farcaster/auth-kit'
+import { db } from '../config/firebase'
 import {
 	collection,
 	query,
@@ -13,20 +14,21 @@ import {
 } from 'firebase/firestore'
 
 export function useDesks() {
+	const { profile } = useProfile()
 	const [desks, setDesks] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	// Fetch desks for current user
 	useEffect(() => {
-		if (!auth.currentUser) {
+		if (!profile?.fid) {
 			setDesks([])
 			setLoading(false)
 			return
 		}
 
 		const desksRef = collection(db, 'desks')
-		const q = query(desksRef, where('userId', '==', auth.currentUser.uid))
+		const q = query(desksRef, where('userId', '==', profile.fid.toString()))
 
 		const unsubscribe = onSnapshot(
 			q,
@@ -38,33 +40,35 @@ export function useDesks() {
 						...doc.data(),
 					})
 				})
-				setDesks(desksData.sort((a, b) => b.createdAt - a.createdAt))
+				setDesks(desksData.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)))
 				setLoading(false)
 			},
 			(err) => {
+				console.error('Error fetching desks:', err)
 				setError(err.message)
 				setLoading(false)
 			}
 		)
 
 		return () => unsubscribe()
-	}, [])
+	}, [profile?.fid])
 
 	// Create new desk
 	const createDesk = async (deskName) => {
-		if (!auth.currentUser) {
+		if (!profile?.fid) {
 			throw new Error('User not authenticated')
 		}
 
 		try {
 			const docRef = await addDoc(collection(db, 'desks'), {
 				name: deskName,
-				userId: auth.currentUser.uid,
+				userId: profile.fid.toString(),
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
 			})
 			return docRef.id
 		} catch (err) {
+			console.error('Error creating desk:', err)
 			setError(err.message)
 			throw err
 		}
@@ -72,7 +76,7 @@ export function useDesks() {
 
 	// Create new column in desk
 	const createColumn = async (deskId, columnName) => {
-		if (!auth.currentUser) {
+		if (!profile?.fid) {
 			throw new Error('User not authenticated')
 		}
 
@@ -80,13 +84,14 @@ export function useDesks() {
 			const docRef = await addDoc(collection(db, 'columns'), {
 				deskId,
 				name: columnName,
-				userId: auth.currentUser.uid,
+				userId: profile.fid.toString(),
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
 				position: 0,
 			})
 			return docRef.id
 		} catch (err) {
+			console.error('Error creating column:', err)
 			setError(err.message)
 			throw err
 		}
