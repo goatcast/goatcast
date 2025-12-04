@@ -6,9 +6,9 @@ export function DeskView({ desk }) {
 
 	if (!desk) {
 		return (
-			<div className="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+			<div className="flex-1 flex items-center justify-center bg-goatcast-background">
 				<div className="text-center">
-					<p className="text-gray-400 text-lg">
+					<p className="text-goatcast-muted text-lg">
 						Select a desk from the sidebar to get started
 					</p>
 				</div>
@@ -18,21 +18,21 @@ export function DeskView({ desk }) {
 
 	if (loading) {
 		return (
-			<div className="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
-				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+			<div className="flex-1 flex items-center justify-center bg-goatcast-background">
+				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-goatcast-darkOrange"></div>
 			</div>
 		)
 	}
 
 	return (
-		<div className="flex-1 bg-gradient-to-br from-gray-900 to-gray-800 overflow-y-auto">
+		<div className="flex-1 bg-goatcast-background overflow-y-auto">
 			<div className="max-w-full px-6 py-6">
 				{/* Desk Header */}
 				<div className="mb-8">
-					<h1 className="text-4xl font-bold text-white mb-2">
+					<h1 className="text-4xl font-bold text-goatcast-title mb-2">
 						📋 {desk.name}
 					</h1>
-					<p className="text-gray-400">
+					<p className="text-goatcast-muted">
 						{columns.length}{' '}
 						{columns.length === 1 ? 'column' : 'columns'}
 					</p>
@@ -40,15 +40,15 @@ export function DeskView({ desk }) {
 
 				{/* Error Message */}
 				{error && (
-					<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6">
+					<div className="bg-goatcast-darkOrange bg-opacity-20 border border-goatcast-darkOrange text-goatcast-darkOrange px-4 py-3 rounded-lg mb-6">
 						{error}
 					</div>
 				)}
 
 				{/* Columns Grid */}
 				{columns.length === 0 ? (
-					<div className="bg-gray-800 border border-gray-700 rounded-lg p-12 text-center">
-						<p className="text-gray-400 mb-4">
+					<div className="bg-goatcast-highlight border border-goatcast-border rounded-lg p-12 text-center">
+						<p className="text-goatcast-muted mb-4">
 							No columns yet. Create one from the sidebar!
 						</p>
 					</div>
@@ -57,11 +57,11 @@ export function DeskView({ desk }) {
 						{columns.map((column) => (
 							<div
 								key={column.id}
-								className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden flex flex-col h-full max-h-[600px]"
+								className="bg-goatcast-highlight border border-goatcast-border rounded-lg shadow-lg overflow-hidden flex flex-col h-full max-h-[600px]"
 							>
 								{/* Column Header */}
-								<div className="bg-gray-700 px-4 py-3 border-b border-gray-600 flex items-center justify-between">
-									<h2 className="font-bold text-white">
+								<div className="bg-goatcast-hover px-4 py-3 border-b border-goatcast-border flex items-center justify-between">
+									<h2 className="font-bold text-goatcast-title">
 										{column.name}
 									</h2>
 									<button
@@ -74,7 +74,7 @@ export function DeskView({ desk }) {
 												deleteColumn(column.id)
 											}
 										}}
-										className="text-gray-400 hover:text-red-400 transition-colors text-sm"
+										className="text-goatcast-muted hover:text-goatcast-darkOrange transition-colors text-sm"
 										title="Delete column"
 									>
 										✕

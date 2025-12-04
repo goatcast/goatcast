@@ -12,22 +12,22 @@ function App() {
 	// Show sign in page if not authenticated
 	if (!profile || isLoading) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
-				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
+			<div className="min-h-screen bg-goatcast-background flex items-center justify-center p-4">
+				<div className="bg-goatcast-highlight rounded-lg shadow-2xl p-8 sm:p-12 border border-goatcast-border max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
-						<p className="text-xl text-gray-300 mb-6">
+						<h1 className="text-5xl font-bold text-goatcast-title mb-4">🐐 Goatcast</h1>
+						<p className="text-xl text-goatcast-muted mb-6">
 							Organize your Farcaster feeds with custom desks
 						</p>
 					</div>
 
 					{isLoading ? (
 						<div className="flex justify-center">
-							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-goatcast-darkOrange"></div>
 						</div>
 					) : (
 						<div>
-							<p className="text-gray-400 mb-4 text-center">
+							<p className="text-goatcast-subTitle mb-4 text-center">
 								Sign in with your Farcaster account to get started
 							</p>
 							<div className="flex justify-center">
@@ -42,14 +42,14 @@ function App() {
 
 	// Main app layout with sidebar and desk view
 	return (
-		<div className="flex h-screen bg-gray-900">
+		<div className="flex h-screen bg-goatcast-background">
 			{/* Sidebar */}
 			<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} />
 
 			{/* Main Content */}
 			<div className="flex-1 flex flex-col">
 				{/* Top Bar with User Info */}
-				<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
+				<div className="bg-goatcast-highlight border-b border-goatcast-border px-6 py-4 flex items-center justify-between">
 					<div className="flex items-center gap-3">
 						{profile.pfpUrl && (
 							<img
@@ -59,10 +59,10 @@ function App() {
 							/>
 						)}
 						<div>
-							<p className="text-white font-semibold">
+							<p className="text-goatcast-title font-semibold">
 								{profile.displayName || profile.username}
 							</p>
-							<p className="text-gray-400 text-sm">@{profile.username}</p>
+							<p className="text-goatcast-muted text-sm">@{profile.username}</p>
 						</div>
 					</div>
 					<SignInButton />
