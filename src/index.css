@@ -1,39 +1,50 @@
 @import 'tailwindcss';
 
-/* Apply color scheme based on theme */
+/* Base styles with smooth transitions */
 html {
-	@apply transition-colors duration-300 ease-in-out;
+	transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 }
 
+/* Light mode (default) */
+html,
 html:not(.dark) {
 	/* Light mode color variables */
-	--goatcast-background: #FAFAFA;
-	--goatcast-base: #FFFFFF;
-	--goatcast-base-reverse: #FFFFFF;
-	--goatcast-border: #F3F3F3;
-	--goatcast-highlight: #EEF0F4;
-	--goatcast-hover: #FBFBFB;
+	--goatcast-background: #fafafa;
+	--goatcast-base: #ffffff;
+	--goatcast-base-reverse: #ffffff;
+	--goatcast-border: #f3f3f3;
+	--goatcast-highlight: #eef0f4;
+	--goatcast-hover: #fbfbfb;
 	--goatcast-muted: #848484;
-	--goatcast-sub-title: #4B4744;
-	--goatcast-title: #0F1414;
+	--goatcast-sub-title: #4b4744;
+	--goatcast-title: #0f1414;
+	--goatcast-dark-orange: #ff4f00;
+	--goatcast-dark-purple: #4d08a4;
+	--goatcast-light-orange: #f97316;
+	color-scheme: light;
 }
 
+/* Dark mode */
 html.dark {
-	/* Dark mode color variables (default) */
+	/* Dark mode color variables */
 	--goatcast-background: #121212;
 	--goatcast-base: #000000;
 	--goatcast-base-reverse: #000000;
-	--goatcast-border: #1E1E1E;
+	--goatcast-border: #1e1e1e;
 	--goatcast-highlight: #242424;
 	--goatcast-hover: #090909;
 	--goatcast-muted: #727272;
-	--goatcast-sub-title: #ACACAC;
-	--goatcast-title: #FFFFFF;
+	--goatcast-sub-title: #acacac;
+	--goatcast-title: #ffffff;
+	--goatcast-dark-orange: #ff4f00;
+	--goatcast-dark-purple: #4d08a4;
+	--goatcast-light-orange: #f97316;
+	color-scheme: dark;
 }
 
-/* Accent colors (same in both modes) */
-:root {
-	--goatcast-dark-orange: #FF4F00;
-	--goatcast-dark-purple: #4D08A4;
-	--goatcast-light-orange: #F97316;
+/* Ensure all elements support transitions */
+* {
+	transition-property: background-color, border-color, color;
+	transition-duration: 300ms;
+	transition-timing-function: ease-in-out;
 }
