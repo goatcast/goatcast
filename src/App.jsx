@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useProfile } from '@farcaster/auth-kit'
 import { SignInButton } from '@farcaster/auth-kit'
 import '@farcaster/auth-kit/styles.css'
+import Feed from './components/Feed'
 
 function App() {
 	const [count, setCount] = useState(0)
@@ -69,6 +70,13 @@ function App() {
 						</div>
 					)}
 				</div>
+
+				{/* Feed Section - Show when user is logged in */}
+				{profile && (
+					<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 mb-6">
+						<Feed />
+					</div>
+				)}
 
 				{/* Counter Section */}
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700">
