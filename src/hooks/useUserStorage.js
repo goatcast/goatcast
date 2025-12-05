@@ -33,8 +33,6 @@ export function useUserStorage() {
 				// Use merge: true to avoid overwriting other fields
 				// This will update lastLoginAt on each login
 				await setDoc(userRef, userData, { merge: true })
-
-				console.log('User data saved to Firebase:', profile.username)
 			} catch (error) {
 				console.error('Error saving user data to Firebase:', error)
 			}

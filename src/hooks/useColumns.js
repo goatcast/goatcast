@@ -18,10 +18,71 @@ export function useColumns(deskId) {
 	const [columns, setColumns] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
+	const [cachedUserId, setCachedUserId] = useState(null)
+
+	// Get user FID from profile or cached session
+	const getUserId = () => {
+		// First try to use the actual profile
+		if (profile?.fid) {
+			return profile.fid.toString()
+		}
+		
+		// If profile is not available, try to get from cached session
+		try {
+			const savedSession = localStorage.getItem('farcaster-session-data')
+			if (savedSession) {
+				const sessionData = JSON.parse(savedSession)
+				if (sessionData.fid) {
+					return sessionData.fid.toString()
+				}
+			}
+		} catch (error) {
+			console.error('Error reading cached session for columns:', error)
+		}
+		
+		return null
+	}
+
+	// Update cachedUserId when profile or localStorage changes
+	useEffect(() => {
+		const userId = getUserId()
+		if (userId && userId !== cachedUserId) {
+			setCachedUserId(userId)
+		} else if (!userId && cachedUserId) {
+			// Clear cachedUserId if no userId is available
+			setCachedUserId(null)
+		}
+	}, [profile?.fid])
+
+	// Check for cached profile on mount
+	useEffect(() => {
+		if (!profile?.fid) {
+			try {
+				const savedSession = localStorage.getItem('farcaster-session-data')
+				if (savedSession) {
+					const sessionData = JSON.parse(savedSession)
+					if (sessionData.fid && !cachedUserId) {
+						const userId = sessionData.fid.toString()
+						setCachedUserId(userId)
+					}
+				}
+			} catch (error) {
+				console.error('Error reading cached session on mount:', error)
+			}
+		}
+	}, []) // Only run on mount
 
 	// Fetch columns for specific desk
 	useEffect(() => {
-		if (!deskId || !profile?.fid) {
+		const userId = getUserId()
+		
+		if (!deskId) {
+			setColumns([])
+			setLoading(false)
+			return
+		}
+		
+		if (!userId) {
 			setColumns([])
 			setLoading(false)
 			return
@@ -42,7 +103,7 @@ export function useColumns(deskId) {
 				snapshot.forEach((doc) => {
 					const data = doc.data()
 					// Only include columns for current user
-					if (data.userId === profile.fid.toString()) {
+					if (data.userId === userId) {
 						columnsData.push({
 							id: doc.id,
 							...data,
@@ -62,7 +123,7 @@ export function useColumns(deskId) {
 		)
 
 		return () => unsubscribe()
-	}, [deskId, profile?.fid])
+	}, [deskId, profile?.fid, cachedUserId]) // Re-run when profile or cachedUserId changes
 
 	// Update column
 	const updateColumn = async (columnId, data) => {

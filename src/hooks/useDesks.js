@@ -19,16 +19,41 @@ export function useDesks() {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
+	// Get user FID from profile or cached session
+	const getUserId = () => {
+		// First try to use the actual profile
+		if (profile?.fid) {
+			return profile.fid.toString()
+		}
+		
+		// If profile is not available, try to get from cached session
+		try {
+			const savedSession = localStorage.getItem('farcaster-session-data')
+			if (savedSession) {
+				const sessionData = JSON.parse(savedSession)
+				if (sessionData.fid) {
+					return sessionData.fid.toString()
+				}
+			}
+		} catch (error) {
+			console.error('Error reading cached session for desks:', error)
+		}
+		
+		return null
+	}
+
 	// Fetch desks for current user
 	useEffect(() => {
-		if (!profile?.fid) {
+		const userId = getUserId()
+		
+		if (!userId) {
 			setDesks([])
 			setLoading(false)
 			return
 		}
 
 		const desksRef = collection(db, 'desks')
-		const q = query(desksRef, where('userId', '==', profile.fid.toString()))
+		const q = query(desksRef, where('userId', '==', userId))
 
 		const unsubscribe = onSnapshot(
 			q,
@@ -51,18 +76,19 @@ export function useDesks() {
 		)
 
 		return () => unsubscribe()
-	}, [profile?.fid])
+	}, [profile?.fid]) // Re-run when profile changes, but getUserId will handle cached profile
 
 	// Create new desk
 	const createDesk = async (deskName) => {
-		if (!profile?.fid) {
-			throw new Error('User not authenticated')
+		const userId = getUserId()
+		if (!userId) {
+			throw new Error('User not authenticated. Please sign in to create desks.')
 		}
 
 		try {
 			const docRef = await addDoc(collection(db, 'desks'), {
 				name: deskName,
-				userId: profile.fid.toString(),
+				userId: userId,
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
 			})
@@ -76,15 +102,16 @@ export function useDesks() {
 
 	// Create new column in desk
 	const createColumn = async (deskId, columnName) => {
-		if (!profile?.fid) {
-			throw new Error('User not authenticated')
+		const userId = getUserId()
+		if (!userId) {
+			throw new Error('User not authenticated. Please sign in to create columns.')
 		}
 
 		try {
 			const docRef = await addDoc(collection(db, 'columns'), {
 				deskId,
 				name: columnName,
-				userId: profile.fid.toString(),
+				userId: userId,
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
 				position: 0,

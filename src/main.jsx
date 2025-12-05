@@ -23,8 +23,7 @@ function SessionManager({ children }) {
       const savedSession = localStorage.getItem('farcaster-session-data')
       if (savedSession) {
         try {
-          const session = JSON.parse(savedSession)
-          console.log('📝 Session data found for:', session.username)
+          JSON.parse(savedSession)
           // Session data is available for child components to use
         } catch (error) {
           console.error('Error parsing session:', error)

@@ -15,9 +15,7 @@ export function CreateDeskModal({ isOpen, onClose, onCreate }) {
 		setLoading(true)
 		setError('')
 		try {
-			console.log('Creating desk with name:', deskName)
 			await onCreate(deskName.trim())
-			console.log('Desk created successfully')
 			setDeskName('')
 			setTimeout(() => {
 				onClose()

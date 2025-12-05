@@ -11,11 +11,9 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 
 	const handleCreateDesk = async (name) => {
 		try {
-			console.log('Sidebar: Creating desk with name:', name)
-			const deskId = await createDesk(name)
-			console.log('Sidebar: Desk created with ID:', deskId)
+			await createDesk(name)
 		} catch (err) {
-			console.error('Sidebar: Failed to create desk:', err)
+			console.error('Failed to create desk:', err)
 			throw err
 		}
 	}
@@ -74,16 +72,16 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 										className="w-full text-left px-4 py-3 text-white font-medium flex items-center justify-between group"
 									>
 										<span className="truncate">{desk.name}</span>
-										<button
+										<span
 											onClick={(e) => {
 												e.stopPropagation()
 												handleDeleteDesk(desk.id)
 											}}
-											className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-400 transition-all duration-200 text-sm"
+											className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-400 transition-all duration-200 text-sm cursor-pointer"
 											title="Delete desk"
 										>
 											✕
-										</button>
+										</span>
 									</button>
 
 									{/* Selected Desk Options */}

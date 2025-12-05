@@ -25,6 +25,16 @@ export function useFarcasterSession() {
 			// Only save if we haven't already saved this user
 			if (lastSavedFid !== profile.fid) {
 				try {
+					// Check what localStorage keys Farcaster auth-kit is using
+					const allKeys = Object.keys(localStorage)
+					const authKitKeys = allKeys.filter(key => {
+						const lowerKey = key.toLowerCase()
+						return lowerKey.includes('farcaster') || 
+						       lowerKey.includes('auth') || 
+						       lowerKey.includes('siwe') ||
+						       lowerKey.includes('token')
+					})
+					
 					// Save the auth data to localStorage
 					const sessionData = {
 						fid: profile.fid,
@@ -35,12 +45,11 @@ export function useFarcasterSession() {
 						followerCount: profile.followerCount || 0,
 						followingCount: profile.followingCount || 0,
 						signedInAt: new Date().toISOString(),
+						// Store the auth-kit keys so we can check if they exist on reload
+						authKitKeys: authKitKeys,
 					}
 					localStorage.setItem('farcaster-session-data', JSON.stringify(sessionData))
 					setLastSavedFid(profile.fid)
-					console.log('✅ Farcaster session saved to localStorage:', profile.username)
-					console.log('📍 Key: farcaster-session-data')
-					console.log('📊 Data:', sessionData)
 				} catch (error) {
 					console.error('❌ Error saving Farcaster session:', error)
 				}
@@ -50,44 +59,46 @@ export function useFarcasterSession() {
 
 	// Check for existing session on mount
 	useEffect(() => {
-		const checkExistingSession = async () => {
+		const savedSession = localStorage.getItem('farcaster-session-data')
+		
+		if (savedSession) {
 			try {
-				const savedSession = localStorage.getItem('farcaster-session-data')
-				
-				// Just check quickly if we have a saved session
-				if (savedSession) {
-					try {
-						const sessionData = JSON.parse(savedSession)
-						console.log('✅ Found existing session for:', sessionData.username)
-						console.log('📝 Session restored from localStorage')
-					} catch (error) {
-						console.error('❌ Error parsing saved session:', error)
-						localStorage.removeItem('farcaster-session-data')
-					}
-				} else {
-					console.log('📝 No saved session found')
+				const sessionData = JSON.parse(savedSession)
+				// Check if the auth-kit keys from when user signed in still exist
+				if (sessionData.authKitKeys && sessionData.authKitKeys.length > 0) {
+					const missingKeys = sessionData.authKitKeys.filter(key => !localStorage.getItem(key))
+					// If keys are missing, auth-kit cannot restore session automatically
 				}
-				
-				// Don't wait, just mark as done immediately
-				// The isLoading flag will show the actual loading state
-				setIsRestoringSession(false)
 			} catch (error) {
-				console.error('❌ Error checking session:', error)
-				setIsRestoringSession(false)
+				console.error('Error parsing saved session:', error)
+				localStorage.removeItem('farcaster-session-data')
 			}
 		}
-
-		checkExistingSession()
 	}, [])
+
+	// Wait for auth-kit to finish restoring session
+	useEffect(() => {
+		// Once loading is complete (either with or without profile), mark restoration as done
+		if (!isLoading) {
+			// Give it a small delay to ensure auth-kit has finished processing
+			const timeoutId = setTimeout(() => {
+				// Re-check profile state after delay to get final state
+				// Note: We can't access profile in the timeout closure, so we'll check it in the effect dependency
+				setIsRestoringSession(false)
+			}, 200) // Small delay to ensure auth-kit has finished
+			
+			return () => clearTimeout(timeoutId)
+		}
+	}, [isLoading, profile])
+
 
 	// Clear session on sign out
 	useEffect(() => {
 		if (isSignedIn === false) {
 			try {
 				localStorage.removeItem('farcaster-session-data')
-				console.log('✅ Session cleared on sign out')
 			} catch (error) {
-				console.error('❌ Error clearing session:', error)
+				console.error('Error clearing session:', error)
 			}
 		}
 	}, [isSignedIn])

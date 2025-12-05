@@ -9,15 +9,7 @@ export function useSessionPersistence() {
 	const { profile, isLoading } = useProfile()
 
 	useEffect(() => {
-		console.log('Auth State Changed:', {
-			isLoading,
-			hasProfile: !!profile,
-			username: profile?.username,
-		})
-		
-		// Log localStorage content for debugging
-		const keys = Object.keys(localStorage).filter(k => k.includes('farcaster') || k.includes('auth'))
-		console.log('LocalStorage Auth Keys:', keys)
+		// Auth state tracking (no logging)
 	}, [profile, isLoading])
 }
 
