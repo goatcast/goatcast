@@ -113,14 +113,14 @@ function App() {
 										cachedProfile.username ||
 										'User avatar'
 									}
-									className="w-10 h-10 rounded-full opacity-50"
+									className="w-10 h-10 rounded-full"
 								/>
 							)}
 							<div>
-								<p className="text-white font-semibold opacity-50">
+								<p className="text-white font-semibold">
 									{cachedProfile.displayName || cachedProfile.username}
 								</p>
-								<p className="text-gray-400 text-sm opacity-50">
+								<p className="text-gray-400 text-sm">
 									@{cachedProfile.username}
 								</p>
 							</div>
