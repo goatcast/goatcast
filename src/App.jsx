@@ -100,32 +100,32 @@ function App() {
 				{/* Sidebar with cached data */}
 				<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} />
 
-			{/* Main Content - Show sign in overlay */}
-			<div className="flex-1 flex flex-col relative">
-				{/* Top Bar with cached User Info */}
-				<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
-					<div className="flex items-center gap-3">
-						{cachedProfile.pfpUrl && (
-							<img
-								src={cachedProfile.pfpUrl}
-								alt={
-									cachedProfile.displayName ||
-									cachedProfile.username ||
-									'User avatar'
-								}
-								className="w-10 h-10 rounded-full opacity-50"
-							/>
-						)}
-						<div>
-							<p className="text-white font-semibold opacity-50">
-								{cachedProfile.displayName || cachedProfile.username}
-							</p>
-							<p className="text-gray-400 text-sm opacity-50">
-								@{cachedProfile.username}
-							</p>
+				{/* Main Content - Show sign in overlay */}
+				<div className="flex-1 flex flex-col relative">
+					{/* Top Bar with cached User Info */}
+					<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
+						<div className="flex items-center gap-3">
+							{cachedProfile.pfpUrl && (
+								<img
+									src={cachedProfile.pfpUrl}
+									alt={
+										cachedProfile.displayName ||
+										cachedProfile.username ||
+										'User avatar'
+									}
+									className="w-10 h-10 rounded-full opacity-50"
+								/>
+							)}
+							<div>
+								<p className="text-white font-semibold opacity-50">
+									{cachedProfile.displayName || cachedProfile.username}
+								</p>
+								<p className="text-gray-400 text-sm opacity-50">
+									@{cachedProfile.username}
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
 
 					{/* Desk Content Area - Show even when not authenticated so user can see their data */}
 					<DeskView desk={selectedDesk} />
