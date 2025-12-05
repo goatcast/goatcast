@@ -29,12 +29,9 @@ export function DeskView({ desk }) {
 			<div className="max-w-full px-6 py-6">
 				{/* Desk Header */}
 				<div className="mb-8">
-					<h1 className="text-4xl font-bold text-white mb-2">
-						📋 {desk.name}
-					</h1>
+					<h1 className="text-4xl font-bold text-white mb-2">📋 {desk.name}</h1>
 					<p className="text-neutral-400">
-						{columns.length}{' '}
-						{columns.length === 1 ? 'column' : 'columns'}
+						{columns.length} {columns.length === 1 ? 'column' : 'columns'}
 					</p>
 				</div>
 
@@ -61,16 +58,10 @@ export function DeskView({ desk }) {
 							>
 								{/* Column Header */}
 								<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between">
-									<h2 className="font-bold text-white">
-										{column.name}
-									</h2>
+									<h2 className="font-bold text-white">{column.name}</h2>
 									<button
 										onClick={() => {
-											if (
-												window.confirm(
-													`Delete "${column.name}" column?`
-												)
-											) {
+											if (window.confirm(`Delete "${column.name}" column?`)) {
 												deleteColumn(column.id)
 											}
 										}}
@@ -95,4 +86,3 @@ export function DeskView({ desk }) {
 }
 
 export default DeskView
-

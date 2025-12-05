@@ -88,9 +88,7 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 									{selectedDesk?.id === desk.id && (
 										<div className="px-4 py-2 border-t border-blue-500">
 											<button
-												onClick={() =>
-													setShowCreateColumnModal(true)
-												}
+												onClick={() => setShowCreateColumnModal(true)}
 												className="w-full px-3 py-2 bg-blue-700 text-white font-medium rounded text-sm hover:bg-blue-800 transition-colors duration-200 flex items-center justify-center gap-2"
 											>
 												<span>+</span>
@@ -132,4 +130,3 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 }
 
 export default Sidebar
-

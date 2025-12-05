@@ -22,7 +22,10 @@ export function CreateDeskModal({ isOpen, onClose, onCreate }) {
 			}, 500)
 		} catch (err) {
 			console.error('Failed to create desk:', err)
-			setError(err.message || 'Failed to create desk. Check your Firebase config and make sure you are signed in.')
+			setError(
+				err.message ||
+					'Failed to create desk. Check your Firebase config and make sure you are signed in.'
+			)
 			setLoading(false)
 		}
 	}
@@ -89,4 +92,3 @@ export function CreateDeskModal({ isOpen, onClose, onCreate }) {
 }
 
 export default CreateDeskModal
-

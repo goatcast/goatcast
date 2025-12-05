@@ -42,7 +42,8 @@ export function CreateColumnModal({ isOpen, onClose, deskId, deskName }) {
 					Create New Column
 				</h2>
 				<p className="text-neutral-400 mb-6">
-					Adding to: <span className="font-semibold text-blue-400">{deskName}</span>
+					Adding to:{' '}
+					<span className="font-semibold text-blue-400">{deskName}</span>
 				</p>
 
 				<form onSubmit={handleSubmit} className="space-y-4">
@@ -95,4 +96,3 @@ export function CreateColumnModal({ isOpen, onClose, deskId, deskName }) {
 }
 
 export default CreateColumnModal
-
