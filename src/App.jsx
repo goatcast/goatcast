@@ -224,7 +224,6 @@ function App() {
 							<p className="text-gray-400 text-sm">@{profile.username}</p>
 						</div>
 					</div>
-					<SignInButton />
 				</div>
 
 				{/* Desk Content Area */}
