@@ -56,15 +56,15 @@ function App() {
 	if (isRestoringSession) {
 		const message = savedSession ? 'Restoring your session...' : 'Loading...'
 		return (
-			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
-				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
+			<div className="min-h-screen bg-black flex items-center justify-center p-4">
+				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
 					</div>
 					<div className="flex justify-center">
 						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 					</div>
-					<p className="text-gray-400 text-center mt-6 text-sm">{message}</p>
+					<p className="text-neutral-400 text-center mt-6 text-sm">{message}</p>
 				</div>
 			</div>
 		)
@@ -74,15 +74,15 @@ function App() {
 	// This prevents showing loading screen after restoration is complete
 	if (isLoading && !cachedProfile && !savedSession) {
 		return (
-			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
-				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
+			<div className="min-h-screen bg-black flex items-center justify-center p-4">
+				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
 					</div>
 					<div className="flex justify-center">
 						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 					</div>
-					<p className="text-gray-400 text-center mt-6 text-sm">Loading...</p>
+					<p className="text-neutral-400 text-center mt-6 text-sm">Loading...</p>
 				</div>
 			</div>
 		)
@@ -96,14 +96,14 @@ function App() {
 
 	if (showAuthPopup) {
 		return (
-			<div className="flex h-screen bg-gray-900">
+			<div className="flex h-screen bg-black">
 				{/* Sidebar with cached data */}
 				<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} />
 
 				{/* Main Content - Show sign in overlay */}
 				<div className="flex-1 flex flex-col relative">
 					{/* Top Bar with cached User Info */}
-					<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
+					<div className="bg-neutral-900 border-b border-neutral-800 px-6 py-4 flex items-center justify-between">
 						<div className="flex items-center gap-3">
 							{cachedProfile.pfpUrl && (
 								<img
@@ -120,7 +120,7 @@ function App() {
 								<p className="text-white font-semibold">
 									{cachedProfile.displayName || cachedProfile.username}
 								</p>
-								<p className="text-gray-400 text-sm">
+								<p className="text-neutral-400 text-sm">
 									@{cachedProfile.username}
 								</p>
 							</div>
@@ -137,11 +137,11 @@ function App() {
 	// Show sign in page if not authenticated and no cache
 	if (!hasValidProfile && !cachedProfile) {
 		return (
-			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
-				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
+			<div className="min-h-screen bg-black flex items-center justify-center p-4">
+				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
-						<p className="text-xl text-gray-300 mb-6">
+						<p className="text-xl text-neutral-300 mb-6">
 							Organize your Farcaster feeds with custom desks
 						</p>
 					</div>
@@ -162,7 +162,7 @@ function App() {
 								</div>
 							)}
 
-							<p className="text-gray-400 mb-4 text-center">
+							<p className="text-neutral-400 mb-4 text-center">
 								{savedSession
 									? 'Sign in to continue'
 									: 'Sign in with your Farcaster account to get started'}
@@ -183,12 +183,12 @@ function App() {
 	if (!hasValidProfile) {
 		// This shouldn't happen if logic is correct, but fallback to sign-in if profile is invalid
 		return (
-			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
-				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
+			<div className="min-h-screen bg-black flex items-center justify-center p-4">
+				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
 					</div>
-					<p className="text-gray-400 mb-4 text-center">
+					<p className="text-neutral-400 mb-4 text-center">
 						Please sign in to continue
 					</p>
 					<div className="flex justify-center">
@@ -200,14 +200,14 @@ function App() {
 	}
 
 	return (
-		<div className="flex h-screen bg-gray-900">
+		<div className="flex h-screen bg-black">
 			{/* Sidebar */}
 			<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} />
 
 			{/* Main Content */}
 			<div className="flex-1 flex flex-col">
 				{/* Top Bar with User Info */}
-				<div className="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
+				<div className="bg-neutral-900 border-b border-neutral-800 px-6 py-4 flex items-center justify-between">
 					<div className="flex items-center gap-3">
 						{profile.pfpUrl && (
 							<img
@@ -220,7 +220,7 @@ function App() {
 							<p className="text-white font-semibold">
 								{profile.displayName || profile.username}
 							</p>
-							<p className="text-gray-400 text-sm">@{profile.username}</p>
+							<p className="text-neutral-400 text-sm">@{profile.username}</p>
 						</div>
 					</div>
 				</div>

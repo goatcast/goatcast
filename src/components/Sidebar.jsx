@@ -33,9 +33,9 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 
 	return (
 		<>
-			<div className="w-64 bg-gray-900 border-r border-gray-700 h-screen flex flex-col overflow-y-auto">
+			<div className="w-64 bg-neutral-950 border-r border-neutral-800 h-screen flex flex-col overflow-y-auto">
 				{/* Header */}
-				<div className="p-4 border-b border-gray-700">
+				<div className="p-4 border-b border-neutral-800">
 					<h2 className="text-xl font-bold text-white mb-4">🐐 Goatcast</h2>
 					<button
 						onClick={() => setShowCreateDeskModal(true)}
@@ -50,11 +50,11 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 				<div className="flex-1 overflow-y-auto p-4">
 					<div className="space-y-2">
 						{loading ? (
-							<div className="text-gray-400 text-sm text-center py-4">
+							<div className="text-neutral-400 text-sm text-center py-4">
 								Loading desks...
 							</div>
 						) : desks.length === 0 ? (
-							<div className="text-gray-400 text-sm text-center py-4">
+							<div className="text-neutral-400 text-sm text-center py-4">
 								No desks yet. Create one to get started!
 							</div>
 						) : (
@@ -64,7 +64,7 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 									className={`rounded-lg overflow-hidden transition-colors duration-200 ${
 										selectedDesk?.id === desk.id
 											? 'bg-blue-600'
-											: 'bg-gray-800 hover:bg-gray-700'
+											: 'bg-neutral-900 hover:bg-neutral-800'
 									}`}
 								>
 									<button
@@ -77,7 +77,7 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 												e.stopPropagation()
 												handleDeleteDesk(desk.id)
 											}}
-											className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-400 transition-all duration-200 text-sm cursor-pointer"
+											className="opacity-0 group-hover:opacity-100 text-neutral-400 hover:text-red-400 transition-all duration-200 text-sm cursor-pointer"
 											title="Delete desk"
 										>
 											✕
@@ -105,8 +105,8 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 				</div>
 
 				{/* Footer */}
-				<div className="p-4 border-t border-gray-700">
-					<p className="text-xs text-gray-500 text-center">
+				<div className="p-4 border-t border-neutral-800">
+					<p className="text-xs text-neutral-500 text-center">
 						Organize your Farcaster feeds
 					</p>
 				</div>
