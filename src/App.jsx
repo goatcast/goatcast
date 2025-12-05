@@ -56,7 +56,7 @@ function App() {
 	if (isRestoringSession) {
 		const message = savedSession ? 'Restoring your session...' : 'Loading...'
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
+			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
@@ -74,7 +74,7 @@ function App() {
 	// This prevents showing loading screen after restoration is complete
 	if (isLoading && !cachedProfile && !savedSession) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
+			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
@@ -137,7 +137,7 @@ function App() {
 	// Show sign in page if not authenticated and no cache
 	if (!hasValidProfile && !cachedProfile) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
+			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
@@ -183,7 +183,7 @@ function App() {
 	if (!hasValidProfile) {
 		// This shouldn't happen if logic is correct, but fallback to sign-in if profile is invalid
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
+			<div className="min-h-screen bg-linear-to-br from-gray-900 to-gray-800 flex items-center justify-center p-4">
 				<div className="bg-gray-800 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-700 max-w-md w-full">
 					<div className="text-center mb-8">
 						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
