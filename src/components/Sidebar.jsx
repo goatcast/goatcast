@@ -3,7 +3,7 @@ import { useDesks } from '../hooks/useDesks'
 import CreateDeskModal from './modals/CreateDeskModal'
 import CreateColumnModal from './modals/CreateColumnModal'
 
-export function Sidebar({ selectedDesk, onDeskSelect }) {
+export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 	const { desks, loading, createDesk, deleteDesk } = useDesks()
 	const [showCreateDeskModal, setShowCreateDeskModal] = useState(false)
 	const [showCreateColumnModal, setShowCreateColumnModal] = useState(false)
@@ -45,6 +45,27 @@ export function Sidebar({ selectedDesk, onDeskSelect }) {
 						<span>New Desk</span>
 					</button>
 				</div>
+
+				{/* User Profile */}
+				{profile && (
+					<div className="p-4 border-b border-neutral-800">
+						<div className="flex items-center gap-3">
+							{profile.pfpUrl && (
+								<img
+									src={profile.pfpUrl}
+									alt={profile.displayName || profile.username || 'User avatar'}
+									className="w-10 h-10 rounded-full"
+								/>
+							)}
+							<div className="flex-1 min-w-0">
+								<p className="text-white font-semibold truncate">
+									{profile.displayName || profile.username}
+								</p>
+								<p className="text-neutral-400 text-sm truncate">@{profile.username}</p>
+							</div>
+						</div>
+					</div>
+				)}
 
 				{/* Desks List */}
 				<div className="flex-1 overflow-y-auto p-4">

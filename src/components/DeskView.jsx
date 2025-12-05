@@ -25,39 +25,43 @@ export function DeskView({ desk }) {
 	}
 
 	return (
-		<div className="flex-1 bg-black overflow-y-auto">
-			<div className="max-w-full px-6 py-6">
-				{/* Desk Header */}
-				<div className="mb-8">
-					<h1 className="text-4xl font-bold text-white mb-2">📋 {desk.name}</h1>
-					<p className="text-neutral-400">
-						{columns.length} {columns.length === 1 ? 'column' : 'columns'}
-					</p>
-				</div>
+		<div className="flex-1 bg-black flex flex-col h-full overflow-hidden">
+			{/* Desk Header */}
+			<div className="px-6 py-4 border-b border-neutral-800 shrink-0">
+				<h1 className="text-4xl font-bold text-white mb-2">📋 {desk.name}</h1>
+				<p className="text-neutral-400">
+					{columns.length} {columns.length === 1 ? 'column' : 'columns'}
+				</p>
+			</div>
 
-				{/* Error Message */}
-				{error && (
-					<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6">
+			{/* Error Message */}
+			{error && (
+				<div className="px-6 py-4 shrink-0">
+					<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg">
 						{error}
 					</div>
-				)}
+				</div>
+			)}
 
-				{/* Columns Grid */}
-				{columns.length === 0 ? (
+			{/* Columns Horizontal Scroll */}
+			{columns.length === 0 ? (
+				<div className="flex-1 flex items-center justify-center px-6">
 					<div className="bg-neutral-900 border border-neutral-800 rounded-lg p-12 text-center">
 						<p className="text-neutral-400 mb-4">
 							No columns yet. Create one from the sidebar!
 						</p>
 					</div>
-				) : (
-					<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+				</div>
+			) : (
+				<div className="flex-1 overflow-x-auto overflow-y-hidden px-6 py-6">
+					<div className="flex gap-6 h-full">
 						{columns.map((column) => (
 							<div
 								key={column.id}
-								className="bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full max-h-[600px]"
+								className="bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px]"
 							>
 								{/* Column Header */}
-								<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between">
+								<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between shrink-0">
 									<h2 className="font-bold text-white">{column.name}</h2>
 									<button
 										onClick={() => {
@@ -79,8 +83,8 @@ export function DeskView({ desk }) {
 							</div>
 						))}
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	)
 }

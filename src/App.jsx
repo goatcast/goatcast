@@ -100,35 +100,10 @@ function App() {
 		return (
 			<div className="flex h-screen bg-black">
 				{/* Sidebar with cached data */}
-				<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} />
+				<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} profile={cachedProfile} />
 
 				{/* Main Content - Show sign in overlay */}
 				<div className="flex-1 flex flex-col relative">
-					{/* Top Bar with cached User Info */}
-					<div className="bg-neutral-900 border-b border-neutral-800 px-6 py-4 flex items-center justify-between">
-						<div className="flex items-center gap-3">
-							{cachedProfile.pfpUrl && (
-								<img
-									src={cachedProfile.pfpUrl}
-									alt={
-										cachedProfile.displayName ||
-										cachedProfile.username ||
-										'User avatar'
-									}
-									className="w-10 h-10 rounded-full"
-								/>
-							)}
-							<div>
-								<p className="text-white font-semibold">
-									{cachedProfile.displayName || cachedProfile.username}
-								</p>
-								<p className="text-neutral-400 text-sm">
-									@{cachedProfile.username}
-								</p>
-							</div>
-						</div>
-					</div>
-
 					{/* Desk Content Area - Show even when not authenticated so user can see their data */}
 					<DeskView desk={selectedDesk} />
 				</div>
@@ -204,29 +179,10 @@ function App() {
 	return (
 		<div className="flex h-screen bg-black">
 			{/* Sidebar */}
-			<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} />
+			<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} profile={profile} />
 
 			{/* Main Content */}
 			<div className="flex-1 flex flex-col">
-				{/* Top Bar with User Info */}
-				<div className="bg-neutral-900 border-b border-neutral-800 px-6 py-4 flex items-center justify-between">
-					<div className="flex items-center gap-3">
-						{profile.pfpUrl && (
-							<img
-								src={profile.pfpUrl}
-								alt={profile.displayName || profile.username || 'User avatar'}
-								className="w-10 h-10 rounded-full"
-							/>
-						)}
-						<div>
-							<p className="text-white font-semibold">
-								{profile.displayName || profile.username}
-							</p>
-							<p className="text-neutral-400 text-sm">@{profile.username}</p>
-						</div>
-					</div>
-				</div>
-
 				{/* Desk Content Area */}
 				<DeskView desk={selectedDesk} />
 			</div>
