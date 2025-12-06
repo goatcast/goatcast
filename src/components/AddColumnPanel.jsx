@@ -104,9 +104,11 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 		setLoading(true)
 		setError('')
 		try {
-			const feedTypeData = [...FEED_TYPES.feeds, ...FEED_TYPES.discover, ...FEED_TYPES.personal].find(
-				(f) => f.id === selectedFeedType
-			)
+			const feedTypeData = [
+				...FEED_TYPES.feeds,
+				...FEED_TYPES.discover,
+				...FEED_TYPES.personal,
+			].find((f) => f.id === selectedFeedType)
 			await createColumn(deskId, feedTypeData.name, selectedFeedType)
 			setSelectedFeedType(null)
 			setError('')
@@ -125,14 +127,11 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 	}, [])
 
 	return (
-		<div
-			className="bg-neutral-900 border border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[400px] max-w-[400px] shrink-0"
-		>
+		<div className="bg-neutral-900 border border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[400px] max-w-[400px] shrink-0">
 			{/* Header */}
 			<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between shrink-0">
 				<h2 className="text-xl font-bold text-white">
-					Add new column to:{' '}
-					<span className="text-blue-400">{deskName}</span>
+					Add new column to: <span className="text-blue-400">{deskName}</span>
 				</h2>
 				<button
 					onClick={onClose}
@@ -145,118 +144,124 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 
 			{/* Content - Scrollable */}
 			<div className="flex-1 overflow-y-auto p-6">
-					{/* Feeds Section */}
-					<div className="mb-8">
-						<h3 className="text-lg font-semibold text-white mb-4">Feeds</h3>
-						<div className="space-y-3">
-							{FEED_TYPES.feeds.map((feed) => (
-								<button
-									key={feed.id}
-									type="button"
-									onClick={() => setSelectedFeedType(feed.id)}
-									className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
-										selectedFeedType === feed.id
-											? 'bg-blue-900/20'
-											: 'hover:bg-neutral-800/50'
-									}`}
-									disabled={loading}
-								>
-									<span className="text-2xl">{feed.icon}</span>
-									<div className="flex-1 text-left">
-										<p className="text-white font-medium">{feed.name}</p>
-										<p className="text-neutral-400 text-sm mt-1">{feed.description}</p>
-									</div>
-									{selectedFeedType === feed.id && (
-										<span className="text-blue-400">✓</span>
-									)}
-								</button>
-							))}
-						</div>
-					</div>
-
-					{/* Discover Section */}
-					<div className="mb-8 pt-8 border-t border-neutral-700">
-						<h3 className="text-lg font-semibold text-white mb-4">Discover</h3>
-						<div className="space-y-3">
-							{FEED_TYPES.discover.map((feed) => (
-								<button
-									key={feed.id}
-									type="button"
-									onClick={() => setSelectedFeedType(feed.id)}
-									className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
-										selectedFeedType === feed.id
-											? 'bg-blue-900/20'
-											: 'hover:bg-neutral-800/50'
-									}`}
-									disabled={loading}
-								>
-									<span className="text-2xl">{feed.icon}</span>
-									<div className="flex-1 text-left">
-										<p className="text-white font-medium">{feed.name}</p>
-										<p className="text-neutral-400 text-sm mt-1">{feed.description}</p>
-									</div>
-									{selectedFeedType === feed.id && (
-										<span className="text-blue-400">✓</span>
-									)}
-								</button>
-							))}
-						</div>
-					</div>
-
-					{/* Personal Section */}
-					<div className="mb-8 pt-8 border-t border-neutral-700">
-						<h3 className="text-lg font-semibold text-white mb-4">Personal</h3>
-						<div className="space-y-3">
-							{FEED_TYPES.personal.map((feed) => (
-								<button
-									key={feed.id}
-									type="button"
-									onClick={() => setSelectedFeedType(feed.id)}
-									className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
-										selectedFeedType === feed.id
-											? 'bg-blue-900/20'
-											: 'hover:bg-neutral-800/50'
-									}`}
-									disabled={loading}
-								>
-									<span className="text-2xl">{feed.icon}</span>
-									<div className="flex-1 text-left">
-										<p className="text-white font-medium">{feed.name}</p>
-										<p className="text-neutral-400 text-sm mt-1">{feed.description}</p>
-									</div>
-									{selectedFeedType === feed.id && (
-										<span className="text-blue-400">✓</span>
-									)}
-								</button>
-							))}
-						</div>
+				{/* Feeds Section */}
+				<div className="mb-8">
+					<h3 className="text-lg font-semibold text-white mb-4">Feeds</h3>
+					<div className="space-y-3">
+						{FEED_TYPES.feeds.map((feed) => (
+							<button
+								key={feed.id}
+								type="button"
+								onClick={() => setSelectedFeedType(feed.id)}
+								className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
+									selectedFeedType === feed.id
+										? 'bg-blue-900/20'
+										: 'hover:bg-neutral-800/50'
+								}`}
+								disabled={loading}
+							>
+								<span className="text-2xl">{feed.icon}</span>
+								<div className="flex-1 text-left">
+									<p className="text-white font-medium">{feed.name}</p>
+									<p className="text-neutral-400 text-sm mt-1">
+										{feed.description}
+									</p>
+								</div>
+								{selectedFeedType === feed.id && (
+									<span className="text-blue-400">✓</span>
+								)}
+							</button>
+						))}
 					</div>
 				</div>
 
+				{/* Discover Section */}
+				<div className="mb-8 pt-8 border-t border-neutral-700">
+					<h3 className="text-lg font-semibold text-white mb-4">Discover</h3>
+					<div className="space-y-3">
+						{FEED_TYPES.discover.map((feed) => (
+							<button
+								key={feed.id}
+								type="button"
+								onClick={() => setSelectedFeedType(feed.id)}
+								className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
+									selectedFeedType === feed.id
+										? 'bg-blue-900/20'
+										: 'hover:bg-neutral-800/50'
+								}`}
+								disabled={loading}
+							>
+								<span className="text-2xl">{feed.icon}</span>
+								<div className="flex-1 text-left">
+									<p className="text-white font-medium">{feed.name}</p>
+									<p className="text-neutral-400 text-sm mt-1">
+										{feed.description}
+									</p>
+								</div>
+								{selectedFeedType === feed.id && (
+									<span className="text-blue-400">✓</span>
+								)}
+							</button>
+						))}
+					</div>
+				</div>
+
+				{/* Personal Section */}
+				<div className="mb-8 pt-8 border-t border-neutral-700">
+					<h3 className="text-lg font-semibold text-white mb-4">Personal</h3>
+					<div className="space-y-3">
+						{FEED_TYPES.personal.map((feed) => (
+							<button
+								key={feed.id}
+								type="button"
+								onClick={() => setSelectedFeedType(feed.id)}
+								className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
+									selectedFeedType === feed.id
+										? 'bg-blue-900/20'
+										: 'hover:bg-neutral-800/50'
+								}`}
+								disabled={loading}
+							>
+								<span className="text-2xl">{feed.icon}</span>
+								<div className="flex-1 text-left">
+									<p className="text-white font-medium">{feed.name}</p>
+									<p className="text-neutral-400 text-sm mt-1">
+										{feed.description}
+									</p>
+								</div>
+								{selectedFeedType === feed.id && (
+									<span className="text-blue-400">✓</span>
+								)}
+							</button>
+						))}
+					</div>
+				</div>
+			</div>
+
 			{/* Footer */}
 			<div className="p-6 border-t border-neutral-800 shrink-0">
-					{error && (
-						<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg text-sm mb-4">
-							{error}
-						</div>
-					)}
+				{error && (
+					<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg text-sm mb-4">
+						{error}
+					</div>
+				)}
 
-					<div className="flex gap-3">
-						<button
-							type="button"
-							onClick={onClose}
-							className="flex-1 px-4 py-2 bg-neutral-800 text-white font-medium rounded-lg hover:bg-neutral-700 transition-colors duration-200"
-							disabled={loading}
-						>
-							Cancel
-						</button>
-						<button
-							type="button"
-							onClick={handleSubmit}
-							className="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:bg-blue-500"
-							disabled={loading || !selectedFeedType}
-						>
-							{loading ? 'Creating...' : 'Create Column'}
+				<div className="flex gap-3">
+					<button
+						type="button"
+						onClick={onClose}
+						className="flex-1 px-4 py-2 bg-neutral-800 text-white font-medium rounded-lg hover:bg-neutral-700 transition-colors duration-200"
+						disabled={loading}
+					>
+						Cancel
+					</button>
+					<button
+						type="button"
+						onClick={handleSubmit}
+						className="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:bg-blue-500"
+						disabled={loading || !selectedFeedType}
+					>
+						{loading ? 'Creating...' : 'Create Column'}
 					</button>
 				</div>
 			</div>
@@ -265,4 +270,3 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 }
 
 export default AddColumnPanel
-

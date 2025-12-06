@@ -40,7 +40,7 @@ export function DeskView({ desk }) {
 
 			{/* Columns Horizontal Scroll */}
 			<div className="flex-1 overflow-x-auto overflow-y-hidden">
-				<div className="flex gap-6 h-full">
+				<div className="flex gap-2 h-full">
 					{columns.map((column) => (
 						<div
 							key={column.id}
