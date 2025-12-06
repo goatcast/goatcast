@@ -46,3 +46,4 @@ export function TimeAgo({ timestamp }) {
 	return <span>{timeString}</span>
 }
 
+
