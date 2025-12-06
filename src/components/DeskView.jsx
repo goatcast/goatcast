@@ -64,7 +64,7 @@ export function DeskView({ desk }) {
 
 							{/* Column Content */}
 							<div className="flex-1 overflow-y-auto">
-								<Feed />
+								<Feed feedType={column.feedType || 'trending_24h'} />
 							</div>
 						</div>
 					))}

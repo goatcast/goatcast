@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { useTrendingFeed } from '../hooks/useTrendingFeed'
+import { useFeed } from '../hooks/useFeed'
 
-export function Feed() {
-	const { casts, loading, loadingMore, error, hasMore, loadMore } =
-		useTrendingFeed()
+export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
+	const { casts, loading, loadingMore, error, hasMore, loadMore } = useFeed(
+		feedType,
+		feedOptions
+	)
 	const observerTarget = useRef(null)
 
 	// Intersection Observer for infinite scroll

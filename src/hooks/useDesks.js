@@ -101,7 +101,7 @@ export function useDesks() {
 	}
 
 	// Create new column in desk
-	const createColumn = async (deskId, columnName) => {
+	const createColumn = async (deskId, columnName, feedType = 'trending_24h') => {
 		const userId = getUserId()
 		if (!userId) {
 			throw new Error('User not authenticated. Please sign in to create columns.')
@@ -111,6 +111,7 @@ export function useDesks() {
 			const docRef = await addDoc(collection(db, 'columns'), {
 				deskId,
 				name: columnName,
+				feedType: feedType,
 				userId: userId,
 				createdAt: serverTimestamp(),
 				updatedAt: serverTimestamp(),
