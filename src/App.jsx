@@ -51,44 +51,6 @@ function App() {
 		}
 	}, [desks, desksLoading, selectedDesk])
 
-	// Show loading screen only while session is being restored
-	// Once restoration is done, show UI even if isLoading is still true (auth-kit might be checking in background)
-	if (isRestoringSession) {
-		const message = savedSession ? 'Restoring your session...' : 'Loading...'
-		return (
-			<div className="min-h-screen bg-black flex items-center justify-center p-4">
-				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
-					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
-					</div>
-					<div className="flex justify-center">
-						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-					</div>
-					<p className="text-neutral-400 text-center mt-6 text-sm">{message}</p>
-				</div>
-			</div>
-		)
-	}
-
-	// Show loading screen only on initial load (before we've checked for cached session)
-	// This prevents showing loading screen after restoration is complete
-	if (isLoading && !cachedProfile && !savedSession) {
-		return (
-			<div className="min-h-screen bg-black flex items-center justify-center p-4">
-				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
-					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
-					</div>
-					<div className="flex justify-center">
-						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-					</div>
-					<p className="text-neutral-400 text-center mt-6 text-sm">
-						Loading...
-					</p>
-				</div>
-			</div>
-		)
-	}
 
 	// If user has a cached profile but isn't currently authenticated, show cached view
 	// This allows users to see their app while re-authenticating
