@@ -21,17 +21,16 @@ export function Feed() {
 	}
 
 	return (
-		<div className="space-y-4">
-			<h2 className="text-2xl font-bold text-white mb-6">Trending Feed</h2>
+		<div className="flex flex-col">
 			{casts.length === 0 ? (
 				<div className="text-center text-neutral-400 py-8">
 					<p>No casts found</p>
 				</div>
 			) : (
-				casts.map((cast) => (
+				casts.map((cast, index) => (
 					<div
 						key={cast.hash}
-						className="bg-neutral-900 rounded-lg shadow-lg border border-neutral-800 hover:border-neutral-700 transition-colors duration-200"
+						className={`p-6 ${index < casts.length - 1 ? 'border-b border-neutral-800' : ''}`}
 					>
 						{/* Author Info */}
 						{cast.author && (
@@ -90,19 +89,32 @@ export function Feed() {
 						)}
 
 						{/* Reactions Footer */}
-						<div className="flex items-center gap-6 text-neutral-400 text-sm pt-4 border-t border-neutral-800">
-							<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
-								<span>💬</span>
-								<span>{cast.replies?.count || 0}</span>
-							</button>
-							<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
-								<span>🔄</span>
-								<span>{cast.reactions?.recasts_count || 0}</span>
-							</button>
-							<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
-								<span>❤️</span>
-								<span>{cast.reactions?.likes_count || 0}</span>
-							</button>
+						<div className="flex items-center justify-between pt-4 border-t border-neutral-800">
+							<div className="flex items-center gap-6 text-neutral-400 text-sm">
+								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
+									<span>💬</span>
+									<span>{cast.replies?.count || 0}</span>
+								</button>
+								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
+									<span>🔄</span>
+									<span>{cast.reactions?.recasts_count || 0}</span>
+								</button>
+								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
+									<span>❤️</span>
+									<span>{cast.reactions?.likes_count || 0}</span>
+								</button>
+							</div>
+							{cast.hash && (
+								<a
+									href={`https://warpcast.com/~/conversations/${cast.hash}`}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors text-sm"
+									title="View on Farcaster"
+								>
+									<span>🔗</span>
+								</a>
+							)}
 						</div>
 					</div>
 				))
