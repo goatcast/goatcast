@@ -1,7 +1,33 @@
+import { useEffect, useRef } from 'react'
 import { useTrendingFeed } from '../hooks/useTrendingFeed'
 
 export function Feed() {
-	const { casts, loading, error } = useTrendingFeed()
+	const { casts, loading, loadingMore, error, hasMore, loadMore } =
+		useTrendingFeed()
+	const observerTarget = useRef(null)
+
+	// Intersection Observer for infinite scroll
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting && hasMore && !loadingMore && !loading) {
+					loadMore()
+				}
+			},
+			{ threshold: 0.1 }
+		)
+
+		const currentTarget = observerTarget.current
+		if (currentTarget) {
+			observer.observe(currentTarget)
+		}
+
+		return () => {
+			if (currentTarget) {
+				observer.unobserve(currentTarget)
+			}
+		}
+	}, [hasMore, loadingMore, loading, loadMore])
 
 	if (loading) {
 		return (
@@ -30,7 +56,7 @@ export function Feed() {
 				casts.map((cast, index) => (
 					<div
 						key={cast.hash}
-						className={`p-6 ${
+						className={`p-5 ${
 							index < casts.length - 1 ? 'border-b border-neutral-800' : ''
 						}`}
 					>
@@ -91,7 +117,7 @@ export function Feed() {
 						)}
 
 						{/* Reactions Footer */}
-						<div className="flex items-center justify-between pt-4 border-t border-neutral-800">
+						<div className="flex items-center justify-between pt-4">
 							<div className="flex items-center gap-6 text-neutral-400 text-sm">
 								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
 									<span>💬</span>
@@ -120,6 +146,31 @@ export function Feed() {
 						</div>
 					</div>
 				))
+			)}
+
+			{/* Load More Trigger */}
+			{hasMore && (
+				<div ref={observerTarget} className="py-8 flex justify-center">
+					{loadingMore ? (
+						<div className="flex items-center gap-2 text-neutral-400">
+							<div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500"></div>
+							<span>Loading more...</span>
+						</div>
+					) : (
+						<button
+							onClick={loadMore}
+							className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+						>
+							Load More
+						</button>
+					)}
+				</div>
+			)}
+
+			{!hasMore && casts.length > 0 && (
+				<div className="text-center text-neutral-500 py-8">
+					<p>No more casts to load</p>
+				</div>
 			)}
 		</div>
 	)

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDesks } from '../hooks/useDesks'
 import CreateDeskModal from './modals/CreateDeskModal'
+import logoCircle from '../logo-circle.png'
 
 export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 	const { desks, loading, createDesk, deleteDesk } = useDesks()
@@ -33,7 +34,14 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 			<div className="w-64 bg-neutral-950 border-r border-neutral-800 h-screen flex flex-col overflow-y-auto">
 				{/* Header */}
 				<div className="p-4 border-b border-neutral-800">
-					<h2 className="text-xl font-bold text-white mb-4">🐐 Goatcast</h2>
+					<div className="flex items-center gap-3 mb-4">
+						<img 
+							src={logoCircle} 
+							alt="Goatcast Logo" 
+							className="w-8 h-8"
+						/>
+						<h2 className="text-xl font-bold text-white">Goatcast</h2>
+					</div>
 					<button
 						onClick={() => setShowCreateDeskModal(true)}
 						className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm flex items-center justify-center gap-2"
@@ -42,29 +50,6 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 						<span>New Desk</span>
 					</button>
 				</div>
-
-				{/* User Profile */}
-				{profile && (
-					<div className="p-4 border-b border-neutral-800">
-						<div className="flex items-center gap-3">
-							{profile.pfpUrl && (
-								<img
-									src={profile.pfpUrl}
-									alt={profile.displayName || profile.username || 'User avatar'}
-									className="w-10 h-10 rounded-full"
-								/>
-							)}
-							<div className="flex-1 min-w-0">
-								<p className="text-white font-semibold truncate">
-									{profile.displayName || profile.username}
-								</p>
-								<p className="text-neutral-400 text-sm truncate">
-									@{profile.username}
-								</p>
-							</div>
-						</div>
-					</div>
-				)}
 
 				{/* Desks List */}
 				<div className="flex-1 overflow-y-auto p-4">
@@ -115,6 +100,29 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 						Organize your Farcaster feeds
 					</p>
 				</div>
+
+				{/* User Profile */}
+				{profile && (
+					<div className="p-4 border-t border-neutral-800">
+						<div className="flex items-center gap-3">
+							{profile.pfpUrl && (
+								<img
+									src={profile.pfpUrl}
+									alt={profile.displayName || profile.username || 'User avatar'}
+									className="w-10 h-10 rounded-full"
+								/>
+							)}
+							<div className="flex-1 min-w-0">
+								<p className="text-white font-semibold truncate">
+									{profile.displayName || profile.username}
+								</p>
+								<p className="text-neutral-400 text-sm truncate">
+									@{profile.username}
+								</p>
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 
 			{/* Modals */}
