@@ -30,7 +30,9 @@ export function Feed() {
 				casts.map((cast, index) => (
 					<div
 						key={cast.hash}
-						className={`p-6 ${index < casts.length - 1 ? 'border-b border-neutral-800' : ''}`}
+						className={`p-6 ${
+							index < casts.length - 1 ? 'border-b border-neutral-800' : ''
+						}`}
 					>
 						{/* Author Info */}
 						{cast.author && (
