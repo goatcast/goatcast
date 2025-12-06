@@ -44,7 +44,7 @@ export function DeskView({ desk }) {
 					{columns.map((column) => (
 						<div
 							key={column.id}
-							className="bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px]"
+							className="bg-neutral-900 border border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px]"
 						>
 							{/* Column Header */}
 							<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between shrink-0">
