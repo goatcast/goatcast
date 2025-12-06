@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDesks } from '../../hooks/useDesks'
 
 export function CreateColumnModal({ isOpen, onClose, deskId, deskName }) {
-	const [columnName, setColumnName] = useState('')
+	const [columnName, setColumnName] = useState('Trending Feed')
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
 	const { createColumn } = useDesks()
@@ -18,7 +18,7 @@ export function CreateColumnModal({ isOpen, onClose, deskId, deskName }) {
 		setError('')
 		try {
 			await createColumn(deskId, columnName.trim())
-			setColumnName('')
+			setColumnName('Trending Feed')
 			onClose()
 		} catch (err) {
 			setError(err.message || 'Failed to create column')
@@ -28,10 +28,17 @@ export function CreateColumnModal({ isOpen, onClose, deskId, deskName }) {
 	}
 
 	const handleClose = () => {
-		setColumnName('')
+		setColumnName('Trending Feed')
 		setError('')
 		onClose()
 	}
+
+	// Reset to default when modal opens
+	useEffect(() => {
+		if (isOpen) {
+			setColumnName('Trending Feed')
+		}
+	}, [isOpen])
 
 	if (!isOpen) return null
 

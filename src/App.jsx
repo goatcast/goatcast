@@ -100,7 +100,11 @@ function App() {
 		return (
 			<div className="flex h-screen bg-black">
 				{/* Sidebar with cached data */}
-				<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} profile={cachedProfile} />
+				<Sidebar
+					selectedDesk={selectedDesk}
+					onDeskSelect={setSelectedDesk}
+					profile={cachedProfile}
+				/>
 
 				{/* Main Content - Show sign in overlay */}
 				<div className="flex-1 flex flex-col relative">
@@ -179,7 +183,11 @@ function App() {
 	return (
 		<div className="flex h-screen bg-black">
 			{/* Sidebar */}
-			<Sidebar selectedDesk={selectedDesk} onDeskSelect={setSelectedDesk} profile={profile} />
+			<Sidebar
+				selectedDesk={selectedDesk}
+				onDeskSelect={setSelectedDesk}
+				profile={profile}
+			/>
 
 			{/* Main Content */}
 			<div className="flex-1 flex flex-col">

@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import { useDesks } from '../hooks/useDesks'
 import CreateDeskModal from './modals/CreateDeskModal'
-import CreateColumnModal from './modals/CreateColumnModal'
 
 export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 	const { desks, loading, createDesk, deleteDesk } = useDesks()
 	const [showCreateDeskModal, setShowCreateDeskModal] = useState(false)
-	const [showCreateColumnModal, setShowCreateColumnModal] = useState(false)
-	const [deskNameInput, setDeskNameInput] = useState('')
 
 	const handleCreateDesk = async (name) => {
 		try {
@@ -61,7 +58,9 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 								<p className="text-white font-semibold truncate">
 									{profile.displayName || profile.username}
 								</p>
-								<p className="text-neutral-400 text-sm truncate">@{profile.username}</p>
+								<p className="text-neutral-400 text-sm truncate">
+									@{profile.username}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -104,19 +103,6 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 											✕
 										</span>
 									</button>
-
-									{/* Selected Desk Options */}
-									{selectedDesk?.id === desk.id && (
-										<div className="px-4 py-2 border-t border-blue-500">
-											<button
-												onClick={() => setShowCreateColumnModal(true)}
-												className="w-full px-3 py-2 bg-blue-700 text-white font-medium rounded text-sm hover:bg-blue-800 transition-colors duration-200 flex items-center justify-center gap-2"
-											>
-												<span>+</span>
-												<span>New Column</span>
-											</button>
-										</div>
-									)}
 								</div>
 							))
 						)}
@@ -137,15 +123,6 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 				onClose={() => setShowCreateDeskModal(false)}
 				onCreate={handleCreateDesk}
 			/>
-
-			{selectedDesk && (
-				<CreateColumnModal
-					isOpen={showCreateColumnModal}
-					onClose={() => setShowCreateColumnModal(false)}
-					deskId={selectedDesk.id}
-					deskName={selectedDesk.name}
-				/>
-			)}
 		</>
 	)
 }
