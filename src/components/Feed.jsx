@@ -31,7 +31,7 @@ export function Feed() {
 				casts.map((cast) => (
 					<div
 						key={cast.hash}
-						className="bg-neutral-900 rounded-lg shadow-lg p-6 border border-neutral-800 hover:border-neutral-700 transition-colors duration-200"
+						className="bg-neutral-900 rounded-lg shadow-lg border border-neutral-800 hover:border-neutral-700 transition-colors duration-200"
 					>
 						{/* Author Info */}
 						{cast.author && (

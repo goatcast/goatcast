@@ -26,14 +26,6 @@ export function DeskView({ desk }) {
 
 	return (
 		<div className="flex-1 bg-black flex flex-col h-full overflow-hidden">
-			{/* Desk Header */}
-			<div className="px-6 py-4 border-b border-neutral-800 shrink-0">
-				<h1 className="text-4xl font-bold text-white mb-2">📋 {desk.name}</h1>
-				<p className="text-neutral-400">
-					{columns.length} {columns.length === 1 ? 'column' : 'columns'}
-				</p>
-			</div>
-
 			{/* Error Message */}
 			{error && (
 				<div className="px-6 py-4 shrink-0">
@@ -53,7 +45,7 @@ export function DeskView({ desk }) {
 					</div>
 				</div>
 			) : (
-				<div className="flex-1 overflow-x-auto overflow-y-hidden px-6 py-6">
+				<div className="flex-1 overflow-x-auto overflow-y-hidden">
 					<div className="flex gap-6 h-full">
 						{columns.map((column) => (
 							<div
@@ -77,7 +69,7 @@ export function DeskView({ desk }) {
 								</div>
 
 								{/* Column Content */}
-								<div className="flex-1 overflow-y-auto p-4">
+								<div className="flex-1 overflow-y-auto">
 									<Feed />
 								</div>
 							</div>
