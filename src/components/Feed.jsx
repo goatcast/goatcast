@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useFeed } from '../hooks/useFeed'
+import { TimeAgo } from './TimeAgo'
 
 export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 	const { casts, loading, loadingMore, error, hasMore, loadMore } = useFeed(
@@ -77,12 +78,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 										<p className="text-white font-semibold">@{cast.author.username}</p>
 									</div>
 									<p className="text-neutral-500 text-sm">
-										{new Date(cast.timestamp).toLocaleDateString('en-US', {
-											month: 'short',
-											day: 'numeric',
-											hour: '2-digit',
-											minute: '2-digit',
-										})}
+										<TimeAgo timestamp={cast.timestamp} />
 									</p>
 								</div>
 							</div>
