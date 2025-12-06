@@ -154,7 +154,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 									key={feed.id}
 									type="button"
 									onClick={() => setSelectedFeedType(feed.id)}
-									className={`w-full flex items-start gap-4 p-4 rounded-lg transition-all ${
+									className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
 										selectedFeedType === feed.id
 											? 'bg-blue-900/20'
 											: 'hover:bg-neutral-800/50'
@@ -175,7 +175,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 					</div>
 
 					{/* Discover Section */}
-					<div className="mb-8">
+					<div className="mb-8 pt-8 border-t border-neutral-700">
 						<h3 className="text-lg font-semibold text-white mb-4">Discover</h3>
 						<div className="space-y-3">
 							{FEED_TYPES.discover.map((feed) => (
@@ -183,7 +183,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 									key={feed.id}
 									type="button"
 									onClick={() => setSelectedFeedType(feed.id)}
-									className={`w-full flex items-start gap-4 p-4 rounded-lg transition-all ${
+									className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
 										selectedFeedType === feed.id
 											? 'bg-blue-900/20'
 											: 'hover:bg-neutral-800/50'
@@ -204,7 +204,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 					</div>
 
 					{/* Personal Section */}
-					<div className="mb-8">
+					<div className="mb-8 pt-8 border-t border-neutral-700">
 						<h3 className="text-lg font-semibold text-white mb-4">Personal</h3>
 						<div className="space-y-3">
 							{FEED_TYPES.personal.map((feed) => (
@@ -212,7 +212,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 									key={feed.id}
 									type="button"
 									onClick={() => setSelectedFeedType(feed.id)}
-									className={`w-full flex items-start gap-4 p-4 rounded-lg transition-all ${
+									className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
 										selectedFeedType === feed.id
 											? 'bg-blue-900/20'
 											: 'hover:bg-neutral-800/50'
