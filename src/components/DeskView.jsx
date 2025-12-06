@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useColumns } from '../hooks/useColumns'
 import Feed from './Feed'
-import CreateColumnModal from './modals/CreateColumnModal'
+import AddColumnPanel from './AddColumnPanel'
 
 export function DeskView({ desk }) {
 	const { columns, loading, error, deleteColumn } = useColumns(desk?.id)
-	const [showCreateColumnModal, setShowCreateColumnModal] = useState(false)
+	const [showAddColumnPanel, setShowAddColumnPanel] = useState(false)
 
 	if (!desk) {
 		return (
@@ -70,29 +70,30 @@ export function DeskView({ desk }) {
 					))}
 
 					{/* Add Column Button */}
-					<div className="flex items-center shrink-0">
-						<button
-							onClick={() => setShowCreateColumnModal(true)}
-							className="flex flex-col items-center justify-center gap-2 w-[200px] h-full px-4 py-8 hover:opacity-70 transition-opacity duration-200"
-						>
-							<span className="text-4xl text-neutral-400">+</span>
-							<span className="text-white font-semibold text-sm">
-								Add Column
-							</span>
-						</button>
-					</div>
+					{!showAddColumnPanel && (
+						<div className="flex items-center shrink-0">
+							<button
+								onClick={() => setShowAddColumnPanel(true)}
+								className="flex flex-col items-center justify-center gap-2 w-[200px] h-full px-4 py-8 hover:opacity-70 transition-opacity duration-200"
+							>
+								<span className="text-4xl text-neutral-400">+</span>
+								<span className="text-white font-semibold text-sm">
+									Add Column
+								</span>
+							</button>
+						</div>
+					)}
+
+					{/* Add Column Panel - Right Side Toggle */}
+					{desk && showAddColumnPanel && (
+						<AddColumnPanel
+							onClose={() => setShowAddColumnPanel(false)}
+							deskId={desk.id}
+							deskName={desk.name}
+						/>
+					)}
 				</div>
 			</div>
-
-			{/* Create Column Modal */}
-			{desk && (
-				<CreateColumnModal
-					isOpen={showCreateColumnModal}
-					onClose={() => setShowCreateColumnModal(false)}
-					deskId={desk.id}
-					deskName={desk.name}
-				/>
-			)}
 		</div>
 	)
 }
