@@ -72,10 +72,7 @@ export function Feed() {
 								)}
 								<div className="flex-1">
 									<div className="flex items-center gap-2">
-										<p className="text-white font-semibold">
-											{cast.author.display_name || cast.author.username}
-										</p>
-										<p className="text-neutral-500">@{cast.author.username}</p>
+										<p className="text-white font-semibold">@{cast.author.username}</p>
 									</div>
 									<p className="text-neutral-500 text-sm">
 										{new Date(cast.timestamp).toLocaleDateString('en-US', {
@@ -90,7 +87,7 @@ export function Feed() {
 						)}
 
 						{/* Cast Text */}
-						<p className="text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap">
+						<p className="text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap break-words">
 							{cast.text}
 						</p>
 
