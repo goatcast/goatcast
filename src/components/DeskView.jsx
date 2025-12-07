@@ -40,15 +40,17 @@ export function DeskView({ desk }) {
 
 			{/* Columns Horizontal Scroll */}
 			<div className="flex-1 overflow-x-auto overflow-y-hidden">
-				<div className="flex gap-2 h-full">
+				<div className="flex h-full">
 					{columns.map((column) => (
 						<div
 							key={column.id}
-							className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px]"
+							className="bg-white dark:bg-neutral-900 overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px] border-r border-gray-200 dark:border-neutral-800"
 						>
 							{/* Column Header */}
 							<div className="bg-gray-50 dark:bg-neutral-800 px-4 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
-								<h2 className="font-bold text-gray-900 dark:text-white">{column.name}</h2>
+								<h2 className="font-bold text-gray-900 dark:text-white">
+									{column.name}
+								</h2>
 								<button
 									onClick={() => {
 										if (window.confirm(`Delete "${column.name}" column?`)) {
@@ -76,7 +78,9 @@ export function DeskView({ desk }) {
 								onClick={() => setShowAddColumnPanel(true)}
 								className="flex flex-col items-center justify-center gap-2 w-[200px] h-full px-4 py-8 hover:opacity-70 transition-opacity duration-200"
 							>
-								<span className="text-4xl text-gray-400 dark:text-neutral-400">+</span>
+								<span className="text-4xl text-gray-400 dark:text-neutral-400">
+									+
+								</span>
 								<span className="text-gray-900 dark:text-white font-semibold text-sm">
 									Add Column
 								</span>
