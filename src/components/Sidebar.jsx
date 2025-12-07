@@ -44,7 +44,7 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 					</div>
 					<button
 						onClick={() => setShowCreateDeskModal(true)}
-						className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm flex items-center justify-center gap-2"
+						className="w-full px-4 py-2 text-white font-semibold rounded-lg transition-colors duration-200 text-sm flex items-center justify-center gap-2"
 					>
 						<span>+</span>
 						<span>New Desk</span>
