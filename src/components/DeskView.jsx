@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { useColumns } from '../hooks/useColumns'
 import Feed from './Feed'
 import AddColumnPanel from './AddColumnPanel'
+import CastDetailPanel from './CastDetailPanel'
 
 export function DeskView({ desk }) {
 	const { columns, loading, error, deleteColumn } = useColumns(desk?.id)
 	const [showAddColumnPanel, setShowAddColumnPanel] = useState(false)
+	const [selectedCastHash, setSelectedCastHash] = useState(null)
 
 	if (!desk) {
 		return (
@@ -66,7 +68,10 @@ export function DeskView({ desk }) {
 
 							{/* Column Content */}
 							<div className="flex-1 overflow-y-auto">
-								<Feed feedType={column.feedType || 'trending_24h'} />
+								<Feed
+									feedType={column.feedType || 'trending_24h'}
+									onCastClick={(castHash) => setSelectedCastHash(castHash)}
+								/>
 							</div>
 						</div>
 					))}
@@ -94,6 +99,14 @@ export function DeskView({ desk }) {
 							onClose={() => setShowAddColumnPanel(false)}
 							deskId={desk.id}
 							deskName={desk.name}
+						/>
+					)}
+
+					{/* Cast Detail Panel - Right Side Toggle */}
+					{selectedCastHash && (
+						<CastDetailPanel
+							castHash={selectedCastHash}
+							onClose={() => setSelectedCastHash(null)}
 						/>
 					)}
 				</div>

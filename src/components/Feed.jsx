@@ -1,8 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { useFeed } from '../hooks/useFeed'
-import { TimeAgo } from './TimeAgo'
+import { CastItem } from './CastItem'
 
-export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
+export function Feed({
+	feedType = 'trending_24h',
+	feedOptions = {},
+	onCastClick,
+}) {
 	const { casts, loading, loadingMore, error, hasMore, loadMore } = useFeed(
 		feedType,
 		feedOptions
@@ -57,93 +61,14 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 				</div>
 			) : (
 				casts.map((cast, index) => (
-					<div
+					<CastItem
 						key={cast.hash}
-						className={`p-5 ${
-							index < casts.length - 1
-								? 'border-b border-gray-200 dark:border-neutral-800'
-								: ''
-						}`}
-					>
-						{/* Author Info */}
-						{cast.author && (
-							<div className="flex items-center gap-3 mb-4">
-								{cast.author.pfp_url && (
-									<img
-										src={cast.author.pfp_url}
-										alt={cast.author.username}
-										className="w-10 h-10 rounded-full"
-									/>
-								)}
-								<div className="flex-1">
-									<div className="flex items-center gap-2">
-										<p className="text-gray-900 dark:text-white font-semibold">
-											@{cast.author.username}
-										</p>
-									</div>
-									<p className="text-gray-500 dark:text-neutral-500 text-sm">
-										<TimeAgo timestamp={cast.timestamp} />
-									</p>
-								</div>
-							</div>
-						)}
-
-						{/* Cast Text */}
-						<p className="text-gray-900 dark:text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap wrap-break-words">
-							{cast.text}
-						</p>
-
-						{/* Embeds */}
-						{cast.embeds && cast.embeds.length > 0 && (
-							<div className="mb-4 space-y-2">
-								{cast.embeds.map((embed, idx) => {
-									if (embed.url) {
-										return (
-											<a
-												key={idx}
-												href={embed.url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="block text-blue-400 hover:underline truncate"
-											>
-												{embed.url}
-											</a>
-										)
-									}
-									return null
-								})}
-							</div>
-						)}
-
-						{/* Reactions Footer */}
-						<div className="flex items-center justify-between pt-4">
-							<div className="flex items-center gap-6 text-gray-500 dark:text-neutral-400 text-sm">
-								<button className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors">
-									<span>💬</span>
-									<span>{cast.replies?.count || 0}</span>
-								</button>
-								<button className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors">
-									<span>🔄</span>
-									<span>{cast.reactions?.recasts_count || 0}</span>
-								</button>
-								<button className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors">
-									<span>❤️</span>
-									<span>{cast.reactions?.likes_count || 0}</span>
-								</button>
-							</div>
-							{cast.hash && (
-								<a
-									href={`https://warpcast.com/~/conversations/${cast.hash}`}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex items-center gap-2 text-gray-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
-									title="View on Farcaster"
-								>
-									<span>🔗</span>
-								</a>
-							)}
-						</div>
-					</div>
+						cast={cast}
+						type="cast"
+						onClick={() => onCastClick && onCastClick(cast.hash)}
+						showBorder={true}
+						isLast={index === casts.length - 1}
+					/>
 				))
 			)}
 
