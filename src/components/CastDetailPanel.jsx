@@ -28,7 +28,7 @@ export function CastDetailPanel({ castHash, onClose }) {
 	return (
 		<div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[400px] max-w-[500px] shrink-0">
 			{/* Header */}
-			<div className="bg-gray-50 dark:bg-neutral-800 px-4 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
+			<div className="bg-gray-50 dark:bg-neutral-800 px-3 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
 				<h2 className="text-xl font-bold text-gray-900 dark:text-white">
 					Cast Details
 				</h2>
@@ -42,7 +42,7 @@ export function CastDetailPanel({ castHash, onClose }) {
 			</div>
 
 			{/* Content - Scrollable */}
-			<div className="flex-1 overflow-y-auto p-6">
+			<div className="flex-1 overflow-y-auto px-3 py-6">
 				{loading ? (
 					<div className="flex justify-center items-center py-12">
 						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
