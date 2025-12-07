@@ -1,5 +1,5 @@
 import { TimeAgo } from './TimeAgo'
-import { MessageCircle, Repeat2, Heart, Link as LinkIcon } from 'lucide-react'
+import { ChatCircle, ArrowsClockwise, Heart, LinkSimple } from 'phosphor-react'
 
 export function CastItem({
 	cast,
@@ -109,21 +109,21 @@ export function CastItem({
 						onClick={(e) => e.stopPropagation()}
 						className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
 					>
-						<MessageCircle className={isComment ? 'w-3.5 h-3.5' : 'w-4 h-4'} />
+						<ChatCircle size={isComment ? 14 : 16} />
 						<span>{cast.replies?.count || 0}</span>
 					</button>
 					<button
 						onClick={(e) => e.stopPropagation()}
 						className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
 					>
-						<Repeat2 className={isComment ? 'w-3.5 h-3.5' : 'w-4 h-4'} />
+						<ArrowsClockwise size={isComment ? 14 : 16} />
 						<span>{cast.reactions?.recasts_count || 0}</span>
 					</button>
 					<button
 						onClick={(e) => e.stopPropagation()}
 						className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
 					>
-						<Heart className={isComment ? 'w-3.5 h-3.5' : 'w-4 h-4'} />
+						<Heart size={isComment ? 14 : 16} />
 						<span>{cast.reactions?.likes_count || 0}</span>
 					</button>
 				</div>
@@ -136,7 +136,7 @@ export function CastItem({
 						className="flex items-center gap-2 text-gray-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
 						title="View on Farcaster"
 					>
-						<LinkIcon className="w-4 h-4" />
+						<LinkSimple size={16} />
 					</a>
 				)}
 			</div>
