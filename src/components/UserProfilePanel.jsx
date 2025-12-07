@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useUserProfile } from '../hooks/useUserProfile'
 import { CastItem } from './CastItem'
-import { User, Users, ArrowLeft } from 'phosphor-react'
+import { User, Users } from 'phosphor-react'
 
 export function UserProfilePanel({
 	userId,
@@ -53,13 +53,6 @@ export function UserProfilePanel({
 			{/* Header */}
 			<div className="bg-gray-50 dark:bg-neutral-800 px-4 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
 				<div className="flex items-center gap-2">
-					<button
-						onClick={onClose}
-						className="text-gray-500 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-white transition-colors mr-2"
-						disabled={loading}
-					>
-						<ArrowLeft size={20} />
-					</button>
 					<h2 className="text-xl font-bold text-gray-900 dark:text-white">
 						Profile
 					</h2>
@@ -137,11 +130,7 @@ export function UserProfilePanel({
 						)}
 
 						{/* User's Casts */}
-						<div className="px-4 py-4">
-							<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-								Casts
-							</h3>
-
+						<div className="px-0">
 							{loading && casts.length === 0 ? (
 								<div className="flex justify-center items-center py-12">
 									<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
