@@ -1,0 +1,35 @@
+{
+	"name": "goatcast-vite",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+		"preview": "vite preview",
+		"deploy": "npm run build && firebase deploy",
+		"deploy:hosting": "npm run build && firebase deploy --only hosting",
+		"deploy:firestore": "firebase deploy --only firestore:rules,firestore:indexes",
+		"firebase:login": "firebase login",
+		"firebase:init": "firebase init",
+		"firebase:emulate": "firebase emulators:start"
+	},
+	"dependencies": {
+		"@farcaster/auth-kit": "^0.8.1",
+		"firebase": "^10.14.1",
+		"phosphor-react": "^1.4.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.17",
+		"@types/react": "^18.2.43",
+		"@types/react-dom": "^18.2.17",
+		"@vitejs/plugin-react": "^4.2.1",
+		"autoprefixer": "^10.4.22",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^4.1.17",
+		"vite": "^5.0.8"
+	}
+}

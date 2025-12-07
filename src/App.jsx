@@ -1,0 +1,171 @@
+import { useState, useEffect } from 'react'
+import { useProfile } from '@farcaster/auth-kit'
+import { SignInButton } from '@farcaster/auth-kit'
+import '@farcaster/auth-kit/styles.css'
+import Sidebar from './components/Sidebar'
+import DeskView from './components/DeskView'
+import { useUserStorage } from './hooks/useUserStorage'
+import { useFarcasterSession } from './hooks/useFarcasterSession'
+import { useDesks } from './hooks/useDesks'
+
+function App() {
+	const { isLoading, profile } = useProfile()
+	const { isRestoringSession } = useFarcasterSession() // Handles session persistence
+	useUserStorage() // This saves user data to Firebase on login
+	const { desks, loading: desksLoading } = useDesks() // Get desks to auto-select first one
+	const [selectedDesk, setSelectedDesk] = useState(null)
+	const [savedSession, setSavedSession] = useState(null)
+	const [cachedProfile, setCachedProfile] = useState(null)
+	const [isSidebarExpanded, setIsSidebarExpanded] = useState(true)
+
+	// Check if profile is missing or invalid (no fid/username)
+	const hasValidProfile = profile && profile.fid && profile.username
+
+	// Load saved session data from localStorage on mount
+	useEffect(() => {
+		const saved = localStorage.getItem('farcaster-session-data')
+
+		if (saved) {
+			try {
+				const sessionData = JSON.parse(saved)
+				setSavedSession(sessionData)
+				setCachedProfile(sessionData) // Use cached profile as fallback
+			} catch (error) {
+				console.error('Error loading saved session:', error)
+			}
+		}
+	}, [])
+
+	// Update cached profile when user logs in with a valid profile
+	useEffect(() => {
+		// Only update if profile is valid (has fid and username)
+		// Don't overwrite cachedProfile with invalid/empty profile objects
+		if (profile && profile.fid && profile.username) {
+			setCachedProfile(profile)
+		}
+	}, [profile])
+
+	// Auto-select first desk when desks are loaded and no desk is selected
+	useEffect(() => {
+		if (!desksLoading && desks.length > 0 && !selectedDesk) {
+			setSelectedDesk(desks[0])
+		}
+	}, [desks, desksLoading, selectedDesk])
+
+	// If user has a cached profile but isn't currently authenticated, show cached view
+	// This allows users to see their app while re-authenticating
+	// Only show popup if user is NOT authenticated
+	const showAuthPopup =
+		!hasValidProfile && cachedProfile && cachedProfile.username
+
+	if (showAuthPopup) {
+		return (
+			<div className="flex h-screen bg-white dark:bg-black">
+				{/* Sidebar with cached data */}
+				<Sidebar
+					selectedDesk={selectedDesk}
+					onDeskSelect={setSelectedDesk}
+					profile={cachedProfile}
+					isExpanded={isSidebarExpanded}
+					onToggleExpand={() => setIsSidebarExpanded(!isSidebarExpanded)}
+				/>
+
+				{/* Main Content - Show sign in overlay */}
+				<div className="flex-1 flex flex-col relative">
+					{/* Desk Content Area - Show even when not authenticated so user can see their data */}
+					<DeskView desk={selectedDesk} />
+				</div>
+			</div>
+		)
+	}
+
+	// Show sign in page if not authenticated and no cache
+	if (!hasValidProfile && !cachedProfile) {
+		return (
+			<div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
+				<div className="bg-white dark:bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-200 dark:border-neutral-800 max-w-md w-full">
+					<div className="text-center mb-8">
+						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
+							🐐 Goatcast
+						</h1>
+						<p className="text-xl text-gray-600 dark:text-neutral-300 mb-6">
+							Organize your Farcaster feeds with custom desks
+						</p>
+					</div>
+
+					{isLoading ? (
+						<div className="flex justify-center">
+							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+						</div>
+					) : (
+						<div>
+							{/* Show welcome back message if we have a saved session */}
+							{savedSession && (
+								<div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 text-blue-900 dark:text-blue-100 px-4 py-3 rounded-lg mb-4 text-center">
+									<p className="text-sm font-semibold">Welcome back! 👋</p>
+									<p className="text-xs text-blue-700 dark:text-blue-200 mt-1">
+										@{savedSession.username}
+									</p>
+								</div>
+							)}
+
+							<p className="text-gray-600 dark:text-neutral-400 mb-4 text-center">
+								{savedSession
+									? 'Sign in to continue'
+									: 'Sign in with your Farcaster account to get started'}
+							</p>
+							<div className="flex justify-center">
+								<SignInButton />
+							</div>
+						</div>
+					)}
+				</div>
+			</div>
+		)
+	}
+
+	// Main app layout with sidebar and desk view
+	// User is authenticated and has valid profile
+	// Only show main app if profile is valid
+	if (!hasValidProfile) {
+		// This shouldn't happen if logic is correct, but fallback to sign-in if profile is invalid
+		return (
+			<div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
+				<div className="bg-white dark:bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-200 dark:border-neutral-800 max-w-md w-full">
+					<div className="text-center mb-8">
+						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
+							🐐 Goatcast
+						</h1>
+					</div>
+					<p className="text-gray-600 dark:text-neutral-400 mb-4 text-center">
+						Please sign in to continue
+					</p>
+					<div className="flex justify-center">
+						<SignInButton />
+					</div>
+				</div>
+			</div>
+		)
+	}
+
+	return (
+		<div className="flex h-screen bg-white dark:bg-black">
+			{/* Sidebar */}
+			<Sidebar
+				selectedDesk={selectedDesk}
+				onDeskSelect={setSelectedDesk}
+				profile={profile}
+				isExpanded={isSidebarExpanded}
+				onToggleExpand={() => setIsSidebarExpanded(!isSidebarExpanded)}
+			/>
+
+			{/* Main Content */}
+			<div className="flex-1 flex flex-col">
+				{/* Desk Content Area */}
+				<DeskView desk={selectedDesk} />
+			</div>
+		</div>
+	)
+}
+
+export default App
