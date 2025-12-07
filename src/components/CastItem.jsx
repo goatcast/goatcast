@@ -24,7 +24,7 @@ export function CastItem({
 	return (
 		<div
 			onClick={onClick}
-			className={`${isComment ? 'p-4' : 'p-5'} ${
+			className={`${isComment ? 'py-4 px-2' : 'p-5'} ${
 				onClick
 					? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-neutral-800/50'
 					: ''
