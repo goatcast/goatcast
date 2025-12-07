@@ -16,6 +16,7 @@ function App() {
 	const [selectedDesk, setSelectedDesk] = useState(null)
 	const [savedSession, setSavedSession] = useState(null)
 	const [cachedProfile, setCachedProfile] = useState(null)
+	const [isSidebarExpanded, setIsSidebarExpanded] = useState(true)
 
 	// Check if profile is missing or invalid (no fid/username)
 	const hasValidProfile = profile && profile.fid && profile.username
@@ -51,7 +52,6 @@ function App() {
 		}
 	}, [desks, desksLoading, selectedDesk])
 
-
 	// If user has a cached profile but isn't currently authenticated, show cached view
 	// This allows users to see their app while re-authenticating
 	// Only show popup if user is NOT authenticated
@@ -66,6 +66,8 @@ function App() {
 					selectedDesk={selectedDesk}
 					onDeskSelect={setSelectedDesk}
 					profile={cachedProfile}
+					isExpanded={isSidebarExpanded}
+					onToggleExpand={() => setIsSidebarExpanded(!isSidebarExpanded)}
 				/>
 
 				{/* Main Content - Show sign in overlay */}
@@ -83,7 +85,9 @@ function App() {
 			<div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
 				<div className="bg-white dark:bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-200 dark:border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">🐐 Goatcast</h1>
+						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
+							🐐 Goatcast
+						</h1>
 						<p className="text-xl text-gray-600 dark:text-neutral-300 mb-6">
 							Organize your Farcaster feeds with custom desks
 						</p>
@@ -129,7 +133,9 @@ function App() {
 			<div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
 				<div className="bg-white dark:bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-200 dark:border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">🐐 Goatcast</h1>
+						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
+							🐐 Goatcast
+						</h1>
 					</div>
 					<p className="text-gray-600 dark:text-neutral-400 mb-4 text-center">
 						Please sign in to continue
@@ -149,6 +155,8 @@ function App() {
 				selectedDesk={selectedDesk}
 				onDeskSelect={setSelectedDesk}
 				profile={profile}
+				isExpanded={isSidebarExpanded}
+				onToggleExpand={() => setIsSidebarExpanded(!isSidebarExpanded)}
 			/>
 
 			{/* Main Content */}

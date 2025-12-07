@@ -6,11 +6,13 @@ import App from './App.jsx'
 import './index.css'
 
 const config = {
-  // Required
-  rpcUrl: 'https://mainnet.optimism.io',
-  // Optional
-  domain: typeof window !== 'undefined' ? window.location.hostname : 'localhost',
-  siweUri: typeof window !== 'undefined' ? window.location.origin : 'http://localhost',
+	// Required
+	rpcUrl: 'https://mainnet.optimism.io',
+	// Optional
+	domain:
+		typeof window !== 'undefined' ? window.location.hostname : 'localhost',
+	siweUri:
+		typeof window !== 'undefined' ? window.location.origin : 'http://localhost',
 }
 
 /**
@@ -18,35 +20,34 @@ const config = {
  * Since @farcaster/auth-kit doesn't auto-persist, we manage it manually
  */
 function SessionManager({ children }) {
-  React.useEffect(() => {
-    // Check if user has a saved session and restore it
-    const checkAndRestoreSession = () => {
-      const savedSession = localStorage.getItem('farcaster-session-data')
-      if (savedSession) {
-        try {
-          JSON.parse(savedSession)
-          // Session data is available for child components to use
-        } catch (error) {
-          console.error('Error parsing session:', error)
-        }
-      }
-    }
-    
-    checkAndRestoreSession()
-  }, [])
+	React.useEffect(() => {
+		// Check if user has a saved session and restore it
+		const checkAndRestoreSession = () => {
+			const savedSession = localStorage.getItem('farcaster-session-data')
+			if (savedSession) {
+				try {
+					JSON.parse(savedSession)
+					// Session data is available for child components to use
+				} catch (error) {
+					console.error('Error parsing session:', error)
+				}
+			}
+		}
 
-  return children
+		checkAndRestoreSession()
+	}, [])
+
+	return children
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <AuthKitProvider config={config}>
-        <SessionManager>
-          <App />
-        </SessionManager>
-      </AuthKitProvider>
-    </ThemeProvider>
-  </React.StrictMode>,
+	<React.StrictMode>
+		<ThemeProvider>
+			<AuthKitProvider config={config}>
+				<SessionManager>
+					<App />
+				</SessionManager>
+			</AuthKitProvider>
+		</ThemeProvider>
+	</React.StrictMode>
 )
-

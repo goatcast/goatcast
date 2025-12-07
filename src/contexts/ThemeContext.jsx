@@ -7,7 +7,7 @@ export function ThemeProvider({ children }) {
 		// Check localStorage first, then default to 'dark'
 		const savedTheme = localStorage.getItem('theme')
 		const initialTheme = savedTheme || 'dark'
-		
+
 		// Apply theme immediately to prevent flash
 		const root = document.documentElement
 		if (initialTheme === 'light') {
@@ -15,7 +15,7 @@ export function ThemeProvider({ children }) {
 		} else {
 			root.classList.add('dark')
 		}
-		
+
 		return initialTheme
 	})
 
@@ -49,3 +49,4 @@ export function useTheme() {
 	}
 	return context
 }
+

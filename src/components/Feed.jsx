@@ -60,7 +60,9 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 					<div
 						key={cast.hash}
 						className={`p-5 ${
-							index < casts.length - 1 ? 'border-b border-gray-200 dark:border-neutral-800' : ''
+							index < casts.length - 1
+								? 'border-b border-gray-200 dark:border-neutral-800'
+								: ''
 						}`}
 					>
 						{/* Author Info */}
@@ -75,7 +77,9 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 								)}
 								<div className="flex-1">
 									<div className="flex items-center gap-2">
-										<p className="text-gray-900 dark:text-white font-semibold">@{cast.author.username}</p>
+										<p className="text-gray-900 dark:text-white font-semibold">
+											@{cast.author.username}
+										</p>
 									</div>
 									<p className="text-gray-500 dark:text-neutral-500 text-sm">
 										<TimeAgo timestamp={cast.timestamp} />
@@ -85,7 +89,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 						)}
 
 						{/* Cast Text */}
-						<p className="text-gray-900 dark:text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap break-words">
+						<p className="text-gray-900 dark:text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap wrap-break-words">
 							{cast.text}
 						</p>
 

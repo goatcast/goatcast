@@ -131,7 +131,8 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 			{/* Header */}
 			<div className="bg-gray-50 dark:bg-neutral-800 px-4 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
 				<h2 className="text-xl font-bold text-gray-900 dark:text-white">
-					Add new column to: <span className="text-blue-600 dark:text-blue-400">{deskName}</span>
+					Add new column to:{' '}
+					<span className="text-blue-600 dark:text-blue-400">{deskName}</span>
 				</h2>
 				<button
 					onClick={onClose}
@@ -146,7 +147,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 			<div className="flex-1 overflow-y-auto p-6">
 				{/* Feeds Section */}
 				<div className="mb-8">
-					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Feeds</h3>
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+						Feeds
+					</h3>
 					<div className="space-y-3">
 						{FEED_TYPES.feeds.map((feed) => (
 							<button
@@ -162,7 +165,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 							>
 								<span className="text-2xl">{feed.icon}</span>
 								<div className="flex-1 text-left">
-									<p className="text-gray-900 dark:text-white font-medium">{feed.name}</p>
+									<p className="text-gray-900 dark:text-white font-medium">
+										{feed.name}
+									</p>
 									<p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">
 										{feed.description}
 									</p>
@@ -177,7 +182,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 
 				{/* Discover Section */}
 				<div className="mb-8 pt-8 border-t border-gray-200 dark:border-neutral-700">
-					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Discover</h3>
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+						Discover
+					</h3>
 					<div className="space-y-3">
 						{FEED_TYPES.discover.map((feed) => (
 							<button
@@ -193,7 +200,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 							>
 								<span className="text-2xl">{feed.icon}</span>
 								<div className="flex-1 text-left">
-									<p className="text-gray-900 dark:text-white font-medium">{feed.name}</p>
+									<p className="text-gray-900 dark:text-white font-medium">
+										{feed.name}
+									</p>
 									<p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">
 										{feed.description}
 									</p>
@@ -208,7 +217,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 
 				{/* Personal Section */}
 				<div className="mb-8 pt-8 border-t border-gray-200 dark:border-neutral-700">
-					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Personal</h3>
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+						Personal
+					</h3>
 					<div className="space-y-3">
 						{FEED_TYPES.personal.map((feed) => (
 							<button
@@ -224,7 +235,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 							>
 								<span className="text-2xl">{feed.icon}</span>
 								<div className="flex-1 text-left">
-									<p className="text-gray-900 dark:text-white font-medium">{feed.name}</p>
+									<p className="text-gray-900 dark:text-white font-medium">
+										{feed.name}
+									</p>
 									<p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">
 										{feed.description}
 									</p>
