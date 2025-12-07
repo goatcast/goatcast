@@ -1,16 +1,25 @@
 import { TimeAgo } from './TimeAgo'
 import { ChatCircle, ArrowsClockwise, Heart, LinkSimple } from 'phosphor-react'
+import { CastText } from './CastText'
 
 export function CastItem({
 	cast,
 	type = 'cast',
 	onClick,
+	onUserClick,
 	showBorder = true,
 	isLast = false,
 }) {
 	if (!cast) return null
 
 	const isComment = type === 'comment'
+
+	const handleUserClick = (e) => {
+		e.stopPropagation()
+		if (onUserClick && cast.author?.fid) {
+			onUserClick(cast.author.fid, cast.author)
+		}
+	}
 
 	return (
 		<div
@@ -34,17 +43,23 @@ export function CastItem({
 						<img
 							src={cast.author.pfp_url}
 							alt={cast.author.username}
-							className={`${isComment ? 'w-8 h-8' : 'w-10 h-10'} rounded-full`}
+							onClick={handleUserClick}
+							className={`${isComment ? 'w-8 h-8' : 'w-10 h-10'} rounded-full ${
+								onUserClick
+									? 'cursor-pointer hover:opacity-80 transition-opacity'
+									: ''
+							}`}
 						/>
 					)}
 					<div className="flex-1">
 						<div className="flex items-center gap-2">
 							<p
+								onClick={handleUserClick}
 								className={`text-gray-900 dark:text-white ${
 									isComment ? 'font-semibold text-sm' : 'font-semibold'
-								}`}
+								} ${onUserClick ? 'cursor-pointer hover:underline' : ''}`}
 							>
-								@{cast.author.username}
+								{cast.author.username}
 							</p>
 						</div>
 						<p
@@ -66,7 +81,15 @@ export function CastItem({
 					isComment ? 'text-sm' : ''
 				}`}
 			>
-				{cast.text}
+				<CastText
+					text={cast.text}
+					onUsernameClick={(username) => {
+						if (onUserClick) {
+							// We'll need to fetch user by username, so pass it to parent
+							onUserClick(null, null, username)
+						}
+					}}
+				/>
 			</p>
 
 			{/* Embeds */}

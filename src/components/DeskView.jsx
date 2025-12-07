@@ -3,11 +3,15 @@ import { useColumns } from '../hooks/useColumns'
 import Feed from './Feed'
 import AddColumnPanel from './AddColumnPanel'
 import CastDetailPanel from './CastDetailPanel'
+import UserProfilePanel from './UserProfilePanel'
 
 export function DeskView({ desk }) {
 	const { columns, loading, error, deleteColumn } = useColumns(desk?.id)
 	const [showAddColumnPanel, setShowAddColumnPanel] = useState(false)
 	const [selectedCastHash, setSelectedCastHash] = useState(null)
+	const [selectedUserId, setSelectedUserId] = useState(null)
+	const [selectedUserData, setSelectedUserData] = useState(null)
+	const [selectedUsername, setSelectedUsername] = useState(null)
 
 	if (!desk) {
 		return (
@@ -71,6 +75,17 @@ export function DeskView({ desk }) {
 								<Feed
 									feedType={column.feedType || 'trending_24h'}
 									onCastClick={(castHash) => setSelectedCastHash(castHash)}
+									onUserClick={(userId, userData, username) => {
+										if (username) {
+											setSelectedUsername(username)
+											setSelectedUserId(null)
+											setSelectedUserData(null)
+										} else if (userId) {
+											setSelectedUserId(userId)
+											setSelectedUserData(userData)
+											setSelectedUsername(null)
+										}
+									}}
 								/>
 							</div>
 						</div>
@@ -107,6 +122,42 @@ export function DeskView({ desk }) {
 						<CastDetailPanel
 							castHash={selectedCastHash}
 							onClose={() => setSelectedCastHash(null)}
+							onUserClick={(userId, userData, username) => {
+								if (username) {
+									setSelectedUsername(username)
+									setSelectedUserId(null)
+									setSelectedUserData(null)
+								} else if (userId) {
+									setSelectedUserId(userId)
+									setSelectedUserData(userData)
+									setSelectedUsername(null)
+								}
+							}}
+						/>
+					)}
+
+					{/* User Profile Panel - Right Side Toggle */}
+					{(selectedUserId || selectedUsername) && (
+						<UserProfilePanel
+							userId={selectedUserId}
+							username={selectedUsername}
+							userData={selectedUserData}
+							onClose={() => {
+								setSelectedUserId(null)
+								setSelectedUserData(null)
+								setSelectedUsername(null)
+							}}
+							onUserClick={(userId, userData, username) => {
+								if (username) {
+									setSelectedUsername(username)
+									setSelectedUserId(null)
+									setSelectedUserData(null)
+								} else if (userId) {
+									setSelectedUserId(userId)
+									setSelectedUserData(userData)
+									setSelectedUsername(null)
+								}
+							}}
 						/>
 					)}
 				</div>

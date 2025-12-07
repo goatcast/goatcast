@@ -6,6 +6,7 @@ export function Feed({
 	feedType = 'trending_24h',
 	feedOptions = {},
 	onCastClick,
+	onUserClick,
 }) {
 	const { casts, loading, loadingMore, error, hasMore, loadMore } = useFeed(
 		feedType,
@@ -66,6 +67,7 @@ export function Feed({
 						cast={cast}
 						type="cast"
 						onClick={() => onCastClick && onCastClick(cast.hash)}
+						onUserClick={onUserClick}
 						showBorder={true}
 						isLast={index === casts.length - 1}
 					/>

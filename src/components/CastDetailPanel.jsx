@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import { useCastDetail } from '../hooks/useCastDetail'
 import { CastItem } from './CastItem'
 import { TimeAgo } from './TimeAgo'
+import { CastText } from './CastText'
 
-export function CastDetailPanel({ castHash, onClose }) {
+export function CastDetailPanel({ castHash, onClose, onUserClick }) {
 	const {
 		cast,
 		replies,
@@ -61,16 +62,43 @@ export function CastDetailPanel({ castHash, onClose }) {
 									<img
 										src={cast.author.pfp_url}
 										alt={cast.author.username}
-										className="w-12 h-12 rounded-full"
+										onClick={() =>
+											onUserClick &&
+											cast.author?.fid &&
+											onUserClick(cast.author.fid, cast.author)
+										}
+										className={`w-12 h-12 rounded-full ${
+											onUserClick
+												? 'cursor-pointer hover:opacity-80 transition-opacity'
+												: ''
+										}`}
 									/>
 								)}
 								<div className="flex-1">
 									<div className="flex items-center gap-2">
-										<p className="text-gray-900 dark:text-white font-semibold">
+										<p
+											onClick={() =>
+												onUserClick &&
+												cast.author?.fid &&
+												onUserClick(cast.author.fid, cast.author)
+											}
+											className={`text-gray-900 dark:text-white font-semibold ${
+												onUserClick ? 'cursor-pointer hover:underline' : ''
+											}`}
+										>
 											{cast.author.display_name || cast.author.username}
 										</p>
 										{cast.author.username && (
-											<p className="text-gray-500 dark:text-neutral-400 text-sm">
+											<p
+												onClick={() =>
+													onUserClick &&
+													cast.author?.fid &&
+													onUserClick(cast.author.fid, cast.author)
+												}
+												className={`text-gray-500 dark:text-neutral-400 text-sm ${
+													onUserClick ? 'cursor-pointer hover:underline' : ''
+												}`}
+											>
 												@{cast.author.username}
 											</p>
 										)}
@@ -87,7 +115,14 @@ export function CastDetailPanel({ castHash, onClose }) {
 						{/* Cast Text */}
 						<div>
 							<p className="text-gray-900 dark:text-neutral-100 leading-relaxed whitespace-pre-wrap wrap-break-word">
-								{cast.text}
+								<CastText
+									text={cast.text}
+									onUsernameClick={(username) => {
+										if (onUserClick) {
+											onUserClick(null, null, username)
+										}
+									}}
+								/>
 							</p>
 							{cast.timestamp && (
 								<p className="text-gray-500 dark:text-neutral-500 text-sm mt-3">
@@ -204,6 +239,7 @@ export function CastDetailPanel({ castHash, onClose }) {
 												key={reply.hash}
 												cast={reply}
 												type="comment"
+												onUserClick={onUserClick}
 												showBorder={true}
 												isLast={index === replies.length - 1}
 											/>
