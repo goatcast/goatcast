@@ -35,11 +35,7 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 				{/* Header */}
 				<div className="p-4 border-b border-neutral-800">
 					<div className="flex items-center gap-3 mb-4">
-						<img 
-							src={logoCircle} 
-							alt="Goatcast Logo" 
-							className="w-8 h-8"
-						/>
+						<img src={logoCircle} alt="Goatcast Logo" className="w-8 h-8" />
 						<h2 className="text-xl font-bold text-white">Goatcast</h2>
 					</div>
 					<button
@@ -68,7 +64,7 @@ export function Sidebar({ selectedDesk, onDeskSelect, profile }) {
 									key={desk.id}
 									className={`rounded-lg overflow-hidden transition-colors duration-200 ${
 										selectedDesk?.id === desk.id
-											? 'bg-blue-600'
+											? 'border border-blue-600'
 											: 'bg-neutral-900 hover:bg-neutral-800'
 									}`}
 								>
