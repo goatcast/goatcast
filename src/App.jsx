@@ -60,7 +60,7 @@ function App() {
 
 	if (showAuthPopup) {
 		return (
-			<div className="flex h-screen bg-black">
+			<div className="flex h-screen bg-white dark:bg-black">
 				{/* Sidebar with cached data */}
 				<Sidebar
 					selectedDesk={selectedDesk}
@@ -80,11 +80,11 @@ function App() {
 	// Show sign in page if not authenticated and no cache
 	if (!hasValidProfile && !cachedProfile) {
 		return (
-			<div className="min-h-screen bg-black flex items-center justify-center p-4">
-				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
+			<div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
+				<div className="bg-white dark:bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-200 dark:border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
-						<p className="text-xl text-neutral-300 mb-6">
+						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">🐐 Goatcast</h1>
+						<p className="text-xl text-gray-600 dark:text-neutral-300 mb-6">
 							Organize your Farcaster feeds with custom desks
 						</p>
 					</div>
@@ -97,15 +97,15 @@ function App() {
 						<div>
 							{/* Show welcome back message if we have a saved session */}
 							{savedSession && (
-								<div className="bg-blue-900 border border-blue-700 text-blue-100 px-4 py-3 rounded-lg mb-4 text-center">
+								<div className="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 text-blue-900 dark:text-blue-100 px-4 py-3 rounded-lg mb-4 text-center">
 									<p className="text-sm font-semibold">Welcome back! 👋</p>
-									<p className="text-xs text-blue-200 mt-1">
+									<p className="text-xs text-blue-700 dark:text-blue-200 mt-1">
 										@{savedSession.username}
 									</p>
 								</div>
 							)}
 
-							<p className="text-neutral-400 mb-4 text-center">
+							<p className="text-gray-600 dark:text-neutral-400 mb-4 text-center">
 								{savedSession
 									? 'Sign in to continue'
 									: 'Sign in with your Farcaster account to get started'}
@@ -126,12 +126,12 @@ function App() {
 	if (!hasValidProfile) {
 		// This shouldn't happen if logic is correct, but fallback to sign-in if profile is invalid
 		return (
-			<div className="min-h-screen bg-black flex items-center justify-center p-4">
-				<div className="bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-neutral-800 max-w-md w-full">
+			<div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
+				<div className="bg-white dark:bg-neutral-900 rounded-lg shadow-2xl p-8 sm:p-12 border border-gray-200 dark:border-neutral-800 max-w-md w-full">
 					<div className="text-center mb-8">
-						<h1 className="text-5xl font-bold text-white mb-4">🐐 Goatcast</h1>
+						<h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">🐐 Goatcast</h1>
 					</div>
-					<p className="text-neutral-400 mb-4 text-center">
+					<p className="text-gray-600 dark:text-neutral-400 mb-4 text-center">
 						Please sign in to continue
 					</p>
 					<div className="flex justify-center">
@@ -143,7 +143,7 @@ function App() {
 	}
 
 	return (
-		<div className="flex h-screen bg-black">
+		<div className="flex h-screen bg-white dark:bg-black">
 			{/* Sidebar */}
 			<Sidebar
 				selectedDesk={selectedDesk}

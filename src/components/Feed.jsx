@@ -42,7 +42,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 
 	if (error) {
 		return (
-			<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6">
+			<div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-900 dark:text-red-200 px-4 py-3 rounded-lg mb-6">
 				<p className="font-semibold">Error loading feed</p>
 				<p className="text-sm">{error}</p>
 			</div>
@@ -52,7 +52,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 	return (
 		<div className="flex flex-col">
 			{casts.length === 0 ? (
-				<div className="text-center text-neutral-400 py-8">
+				<div className="text-center text-gray-500 dark:text-neutral-400 py-8">
 					<p>No casts found</p>
 				</div>
 			) : (
@@ -60,7 +60,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 					<div
 						key={cast.hash}
 						className={`p-5 ${
-							index < casts.length - 1 ? 'border-b border-neutral-800' : ''
+							index < casts.length - 1 ? 'border-b border-gray-200 dark:border-neutral-800' : ''
 						}`}
 					>
 						{/* Author Info */}
@@ -75,9 +75,9 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 								)}
 								<div className="flex-1">
 									<div className="flex items-center gap-2">
-										<p className="text-white font-semibold">@{cast.author.username}</p>
+										<p className="text-gray-900 dark:text-white font-semibold">@{cast.author.username}</p>
 									</div>
-									<p className="text-neutral-500 text-sm">
+									<p className="text-gray-500 dark:text-neutral-500 text-sm">
 										<TimeAgo timestamp={cast.timestamp} />
 									</p>
 								</div>
@@ -85,7 +85,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 						)}
 
 						{/* Cast Text */}
-						<p className="text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap break-words">
+						<p className="text-gray-900 dark:text-neutral-100 mb-4 leading-relaxed whitespace-pre-wrap break-words">
 							{cast.text}
 						</p>
 
@@ -113,16 +113,16 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 
 						{/* Reactions Footer */}
 						<div className="flex items-center justify-between pt-4">
-							<div className="flex items-center gap-6 text-neutral-400 text-sm">
-								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
+							<div className="flex items-center gap-6 text-gray-500 dark:text-neutral-400 text-sm">
+								<button className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors">
 									<span>💬</span>
 									<span>{cast.replies?.count || 0}</span>
 								</button>
-								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
+								<button className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors">
 									<span>🔄</span>
 									<span>{cast.reactions?.recasts_count || 0}</span>
 								</button>
-								<button className="flex items-center gap-2 hover:text-neutral-300 transition-colors">
+								<button className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors">
 									<span>❤️</span>
 									<span>{cast.reactions?.likes_count || 0}</span>
 								</button>
@@ -132,7 +132,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 									href={`https://warpcast.com/~/conversations/${cast.hash}`}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors text-sm"
+									className="flex items-center gap-2 text-gray-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
 									title="View on Farcaster"
 								>
 									<span>🔗</span>
@@ -147,7 +147,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 			{hasMore && (
 				<div ref={observerTarget} className="py-8 flex justify-center">
 					{loadingMore ? (
-						<div className="flex items-center gap-2 text-neutral-400">
+						<div className="flex items-center gap-2 text-gray-500 dark:text-neutral-400">
 							<div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500"></div>
 							<span>Loading more...</span>
 						</div>
@@ -163,7 +163,7 @@ export function Feed({ feedType = 'trending_24h', feedOptions = {} }) {
 			)}
 
 			{!hasMore && casts.length > 0 && (
-				<div className="text-center text-neutral-500 py-8">
+				<div className="text-center text-gray-500 dark:text-neutral-500 py-8">
 					<p>No more casts to load</p>
 				</div>
 			)}

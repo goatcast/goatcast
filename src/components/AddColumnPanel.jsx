@@ -127,15 +127,15 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 	}, [])
 
 	return (
-		<div className="bg-neutral-900 border border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[400px] max-w-[400px] shrink-0">
+		<div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[400px] max-w-[400px] shrink-0">
 			{/* Header */}
-			<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between shrink-0">
-				<h2 className="text-xl font-bold text-white">
-					Add new column to: <span className="text-blue-400">{deskName}</span>
+			<div className="bg-gray-50 dark:bg-neutral-800 px-4 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
+				<h2 className="text-xl font-bold text-gray-900 dark:text-white">
+					Add new column to: <span className="text-blue-600 dark:text-blue-400">{deskName}</span>
 				</h2>
 				<button
 					onClick={onClose}
-					className="text-neutral-400 hover:text-white transition-colors text-lg"
+					className="text-gray-500 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-white transition-colors text-lg"
 					disabled={loading}
 				>
 					✕
@@ -146,7 +146,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 			<div className="flex-1 overflow-y-auto p-6">
 				{/* Feeds Section */}
 				<div className="mb-8">
-					<h3 className="text-lg font-semibold text-white mb-4">Feeds</h3>
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Feeds</h3>
 					<div className="space-y-3">
 						{FEED_TYPES.feeds.map((feed) => (
 							<button
@@ -155,20 +155,20 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 								onClick={() => setSelectedFeedType(feed.id)}
 								className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
 									selectedFeedType === feed.id
-										? 'bg-blue-900/20'
-										: 'hover:bg-neutral-800/50'
+										? 'bg-blue-50 dark:bg-blue-900/20'
+										: 'hover:bg-gray-50 dark:hover:bg-neutral-800/50'
 								}`}
 								disabled={loading}
 							>
 								<span className="text-2xl">{feed.icon}</span>
 								<div className="flex-1 text-left">
-									<p className="text-white font-medium">{feed.name}</p>
-									<p className="text-neutral-400 text-sm mt-1">
+									<p className="text-gray-900 dark:text-white font-medium">{feed.name}</p>
+									<p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">
 										{feed.description}
 									</p>
 								</div>
 								{selectedFeedType === feed.id && (
-									<span className="text-blue-400">✓</span>
+									<span className="text-blue-600 dark:text-blue-400">✓</span>
 								)}
 							</button>
 						))}
@@ -176,8 +176,8 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 				</div>
 
 				{/* Discover Section */}
-				<div className="mb-8 pt-8 border-t border-neutral-700">
-					<h3 className="text-lg font-semibold text-white mb-4">Discover</h3>
+				<div className="mb-8 pt-8 border-t border-gray-200 dark:border-neutral-700">
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Discover</h3>
 					<div className="space-y-3">
 						{FEED_TYPES.discover.map((feed) => (
 							<button
@@ -186,20 +186,20 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 								onClick={() => setSelectedFeedType(feed.id)}
 								className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
 									selectedFeedType === feed.id
-										? 'bg-blue-900/20'
-										: 'hover:bg-neutral-800/50'
+										? 'bg-blue-50 dark:bg-blue-900/20'
+										: 'hover:bg-gray-50 dark:hover:bg-neutral-800/50'
 								}`}
 								disabled={loading}
 							>
 								<span className="text-2xl">{feed.icon}</span>
 								<div className="flex-1 text-left">
-									<p className="text-white font-medium">{feed.name}</p>
-									<p className="text-neutral-400 text-sm mt-1">
+									<p className="text-gray-900 dark:text-white font-medium">{feed.name}</p>
+									<p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">
 										{feed.description}
 									</p>
 								</div>
 								{selectedFeedType === feed.id && (
-									<span className="text-blue-400">✓</span>
+									<span className="text-blue-600 dark:text-blue-400">✓</span>
 								)}
 							</button>
 						))}
@@ -207,8 +207,8 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 				</div>
 
 				{/* Personal Section */}
-				<div className="mb-8 pt-8 border-t border-neutral-700">
-					<h3 className="text-lg font-semibold text-white mb-4">Personal</h3>
+				<div className="mb-8 pt-8 border-t border-gray-200 dark:border-neutral-700">
+					<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Personal</h3>
 					<div className="space-y-3">
 						{FEED_TYPES.personal.map((feed) => (
 							<button
@@ -217,20 +217,20 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 								onClick={() => setSelectedFeedType(feed.id)}
 								className={`w-full flex items-start gap-4 py-4 px-2 rounded-lg transition-all ${
 									selectedFeedType === feed.id
-										? 'bg-blue-900/20'
-										: 'hover:bg-neutral-800/50'
+										? 'bg-blue-50 dark:bg-blue-900/20'
+										: 'hover:bg-gray-50 dark:hover:bg-neutral-800/50'
 								}`}
 								disabled={loading}
 							>
 								<span className="text-2xl">{feed.icon}</span>
 								<div className="flex-1 text-left">
-									<p className="text-white font-medium">{feed.name}</p>
-									<p className="text-neutral-400 text-sm mt-1">
+									<p className="text-gray-900 dark:text-white font-medium">{feed.name}</p>
+									<p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">
 										{feed.description}
 									</p>
 								</div>
 								{selectedFeedType === feed.id && (
-									<span className="text-blue-400">✓</span>
+									<span className="text-blue-600 dark:text-blue-400">✓</span>
 								)}
 							</button>
 						))}
@@ -239,9 +239,9 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 			</div>
 
 			{/* Footer */}
-			<div className="p-6 border-t border-neutral-800 shrink-0">
+			<div className="p-6 border-t border-gray-200 dark:border-neutral-800 shrink-0">
 				{error && (
-					<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg text-sm mb-4">
+					<div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-900 dark:text-red-200 px-4 py-3 rounded-lg text-sm mb-4">
 						{error}
 					</div>
 				)}
@@ -250,7 +250,7 @@ export function AddColumnPanel({ onClose, deskId, deskName }) {
 					<button
 						type="button"
 						onClick={onClose}
-						className="flex-1 px-4 py-2 bg-neutral-800 text-white font-medium rounded-lg hover:bg-neutral-700 transition-colors duration-200"
+						className="flex-1 px-4 py-2 bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors duration-200"
 						disabled={loading}
 					>
 						Cancel

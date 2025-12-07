@@ -9,9 +9,9 @@ export function DeskView({ desk }) {
 
 	if (!desk) {
 		return (
-			<div className="flex-1 flex items-center justify-center bg-black">
+			<div className="flex-1 flex items-center justify-center bg-white dark:bg-black">
 				<div className="text-center">
-					<p className="text-neutral-400 text-lg">
+					<p className="text-gray-600 dark:text-neutral-400 text-lg">
 						Select a desk from the sidebar to get started
 					</p>
 				</div>
@@ -21,18 +21,18 @@ export function DeskView({ desk }) {
 
 	if (loading) {
 		return (
-			<div className="flex-1 flex items-center justify-center bg-black">
+			<div className="flex-1 flex items-center justify-center bg-white dark:bg-black">
 				<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
 			</div>
 		)
 	}
 
 	return (
-		<div className="flex-1 bg-black flex flex-col h-full overflow-hidden">
+		<div className="flex-1 bg-white dark:bg-black flex flex-col h-full overflow-hidden">
 			{/* Error Message */}
 			{error && (
 				<div className="px-6 py-4 shrink-0">
-					<div className="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg">
+					<div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-900 dark:text-red-200 px-4 py-3 rounded-lg">
 						{error}
 					</div>
 				</div>
@@ -44,18 +44,18 @@ export function DeskView({ desk }) {
 					{columns.map((column) => (
 						<div
 							key={column.id}
-							className="bg-neutral-900 border border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px]"
+							className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 shadow-lg overflow-hidden flex flex-col h-full min-w-[350px] max-w-[350px]"
 						>
 							{/* Column Header */}
-							<div className="bg-neutral-800 px-4 py-3 border-b border-neutral-700 flex items-center justify-between shrink-0">
-								<h2 className="font-bold text-white">{column.name}</h2>
+							<div className="bg-gray-50 dark:bg-neutral-800 px-4 py-3 border-b border-gray-200 dark:border-neutral-700 flex items-center justify-between shrink-0">
+								<h2 className="font-bold text-gray-900 dark:text-white">{column.name}</h2>
 								<button
 									onClick={() => {
 										if (window.confirm(`Delete "${column.name}" column?`)) {
 											deleteColumn(column.id)
 										}
 									}}
-									className="text-neutral-400 hover:text-red-400 transition-colors text-sm"
+									className="text-gray-500 dark:text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors text-sm"
 									title="Delete column"
 								>
 									✕
@@ -76,8 +76,8 @@ export function DeskView({ desk }) {
 								onClick={() => setShowAddColumnPanel(true)}
 								className="flex flex-col items-center justify-center gap-2 w-[200px] h-full px-4 py-8 hover:opacity-70 transition-opacity duration-200"
 							>
-								<span className="text-4xl text-neutral-400">+</span>
-								<span className="text-white font-semibold text-sm">
+								<span className="text-4xl text-gray-400 dark:text-neutral-400">+</span>
+								<span className="text-gray-900 dark:text-white font-semibold text-sm">
 									Add Column
 								</span>
 							</button>
