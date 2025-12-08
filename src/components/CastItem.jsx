@@ -5,14 +5,23 @@ import { CastText } from './CastText'
 // Helper function to check if a URL is an image
 const isImageUrl = (url) => {
 	if (!url) return false
-	const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp', '.ico']
+	const imageExtensions = [
+		'.jpg',
+		'.jpeg',
+		'.png',
+		'.gif',
+		'.webp',
+		'.svg',
+		'.bmp',
+		'.ico',
+	]
 	const lowerUrl = url.toLowerCase()
-	
+
 	// Check for image extensions
-	if (imageExtensions.some(ext => lowerUrl.includes(ext))) {
+	if (imageExtensions.some((ext) => lowerUrl.includes(ext))) {
 		return true
 	}
-	
+
 	// Check for common image hosting patterns
 	const imageHostPatterns = [
 		'imgur.com',
@@ -25,8 +34,8 @@ const isImageUrl = (url) => {
 		'picsum.photos',
 		'via.placeholder.com',
 	]
-	
-	return imageHostPatterns.some(pattern => lowerUrl.includes(pattern))
+
+	return imageHostPatterns.some((pattern) => lowerUrl.includes(pattern))
 }
 
 export function CastItem({
@@ -125,7 +134,7 @@ export function CastItem({
 					{cast.embeds.map((embed, idx) => {
 						if (embed.url) {
 							const isImage = isImageUrl(embed.url)
-							
+
 							if (isImage) {
 								return (
 									<a
@@ -145,7 +154,8 @@ export function CastItem({
 												e.target.style.display = 'none'
 												const parent = e.target.parentElement
 												if (parent) {
-													parent.className = 'block text-blue-400 hover:underline truncate'
+													parent.className =
+														'block text-blue-400 hover:underline truncate'
 													parent.textContent = embed.url
 												}
 											}}
@@ -153,7 +163,7 @@ export function CastItem({
 									</a>
 								)
 							}
-							
+
 							return (
 								<a
 									key={idx}
