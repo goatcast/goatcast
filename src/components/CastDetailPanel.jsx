@@ -40,7 +40,12 @@ const isImageUrl = (url) => {
 	return imageHostPatterns.some((pattern) => lowerUrl.includes(pattern))
 }
 
-export function CastDetailPanel({ castHash, onClose, onUserClick, onCastClick }) {
+export function CastDetailPanel({
+	castHash,
+	onClose,
+	onUserClick,
+	onCastClick,
+}) {
 	const {
 		cast,
 		replies,
