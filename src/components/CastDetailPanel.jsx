@@ -4,6 +4,33 @@ import { CastItem } from './CastItem'
 import { TimeAgo } from './TimeAgo'
 import { CastText } from './CastText'
 
+// Helper function to check if a URL is an image
+const isImageUrl = (url) => {
+	if (!url) return false
+	const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp', '.ico']
+	const lowerUrl = url.toLowerCase()
+	
+	// Check for image extensions
+	if (imageExtensions.some(ext => lowerUrl.includes(ext))) {
+		return true
+	}
+	
+	// Check for common image hosting patterns
+	const imageHostPatterns = [
+		'imgur.com',
+		'i.imgur.com',
+		'images.unsplash.com',
+		'imagedelivery.net',
+		'cdn.',
+		'image.',
+		'img.',
+		'picsum.photos',
+		'via.placeholder.com',
+	]
+	
+	return imageHostPatterns.some(pattern => lowerUrl.includes(pattern))
+}
+
 export function CastDetailPanel({ castHash, onClose, onUserClick }) {
 	const {
 		cast,
@@ -139,6 +166,38 @@ export function CastDetailPanel({ castHash, onClose, onUserClick }) {
 								</h3>
 								{cast.embeds.map((embed, idx) => {
 									if (embed.url) {
+										const isImage = isImageUrl(embed.url)
+										
+										if (isImage) {
+											return (
+												<a
+													key={idx}
+													href={embed.url}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="block rounded-lg overflow-hidden border border-gray-200 dark:border-neutral-700 hover:opacity-90 transition-opacity"
+												>
+													<img
+														src={embed.url}
+														alt="Embedded image"
+														className="w-full h-auto max-h-96 object-contain bg-gray-50 dark:bg-neutral-800"
+														onError={(e) => {
+															// Fallback to link if image fails to load
+															e.target.style.display = 'none'
+															const parent = e.target.parentElement
+															if (parent) {
+																parent.className = 'block p-3 bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors'
+																const p = document.createElement('p')
+																p.className = 'text-blue-600 dark:text-blue-400 text-sm break-all'
+																p.textContent = embed.url
+																parent.appendChild(p)
+															}
+														}}
+													/>
+												</a>
+											)
+										}
+										
 										return (
 											<a
 												key={idx}
