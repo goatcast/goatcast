@@ -40,7 +40,7 @@ const isImageUrl = (url) => {
 	return imageHostPatterns.some((pattern) => lowerUrl.includes(pattern))
 }
 
-export function CastDetailPanel({ castHash, onClose, onUserClick }) {
+export function CastDetailPanel({ castHash, onClose, onUserClick, onCastClick }) {
 	const {
 		cast,
 		replies,
@@ -179,14 +179,17 @@ export function CastDetailPanel({ castHash, onClose, onUserClick }) {
 										return (
 											<div
 												key={idx}
-												className="border border-gray-200 dark:border-neutral-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-neutral-800/50"
+												onClick={(e) => e.stopPropagation()}
+												className="border border-gray-200 dark:border-neutral-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-neutral-800/50 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-700/50 transition-colors"
 											>
 												<CastItem
 													cast={embed.cast}
 													type="comment"
+													onCastClick={onCastClick}
 													onUserClick={onUserClick}
 													showBorder={false}
 													isLast={true}
+													hideReactions={true}
 												/>
 											</div>
 										)

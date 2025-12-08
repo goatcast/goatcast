@@ -66,7 +66,7 @@ export function Feed({
 						key={cast.hash}
 						cast={cast}
 						type="cast"
-						onClick={() => onCastClick && onCastClick(cast.hash)}
+						onCastClick={onCastClick}
 						onUserClick={onUserClick}
 						showBorder={true}
 						isLast={index === casts.length - 1}

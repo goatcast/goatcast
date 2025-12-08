@@ -42,13 +42,24 @@ export function CastItem({
 	cast,
 	type = 'cast',
 	onClick,
+	onCastClick,
 	onUserClick,
 	showBorder = true,
 	isLast = false,
+	hideReactions = false,
 }) {
 	if (!cast) return null
 
 	const isComment = type === 'comment'
+
+	// Handle cast click - prefer onCastClick with hash, fallback to onClick
+	const handleCastClick = () => {
+		if (onCastClick && cast.hash) {
+			onCastClick(cast.hash)
+		} else if (onClick) {
+			onClick()
+		}
+	}
 
 	const handleUserClick = (e) => {
 		e.stopPropagation()
@@ -59,9 +70,9 @@ export function CastItem({
 
 	return (
 		<div
-			onClick={onClick}
+			onClick={handleCastClick}
 			className={`${isComment ? 'py-4 px-2' : 'p-5'} ${
-				onClick
+				onClick || onCastClick
 					? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-neutral-800/50'
 					: ''
 			} transition-colors ${
@@ -138,15 +149,16 @@ export function CastItem({
 								<div
 									key={idx}
 									onClick={(e) => e.stopPropagation()}
-									className="border border-gray-200 dark:border-neutral-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-neutral-800/50"
+									className="border border-gray-200 dark:border-neutral-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-neutral-800/50 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-700/50 transition-colors"
 								>
 									<CastItem
 										cast={embed.cast}
 										type="comment"
-										onClick={onClick}
+										onCastClick={onCastClick}
 										onUserClick={onUserClick}
 										showBorder={false}
 										isLast={true}
+										hideReactions={true}
 									/>
 								</div>
 							)
@@ -226,53 +238,55 @@ export function CastItem({
 			)}
 
 			{/* Reactions Footer */}
-			<div
-				className={`flex items-center ${
-					isComment ? 'justify-start' : 'justify-between'
-				} ${isComment ? 'pt-2' : 'pt-4'}`}
-			>
+			{!hideReactions && (
 				<div
 					className={`flex items-center ${
-						isComment ? 'gap-4' : 'gap-6'
-					} text-gray-500 dark:text-neutral-400 ${
-						isComment ? 'text-xs' : 'text-sm'
-					}`}
+						isComment ? 'justify-start' : 'justify-between'
+					} ${isComment ? 'pt-2' : 'pt-4'}`}
 				>
-					<button
-						onClick={(e) => e.stopPropagation()}
-						className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
+					<div
+						className={`flex items-center ${
+							isComment ? 'gap-4' : 'gap-6'
+						} text-gray-500 dark:text-neutral-400 ${
+							isComment ? 'text-xs' : 'text-sm'
+						}`}
 					>
-						<ChatCircle size={isComment ? 14 : 16} />
-						<span>{cast.replies?.count || 0}</span>
-					</button>
-					<button
-						onClick={(e) => e.stopPropagation()}
-						className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
-					>
-						<ArrowsClockwise size={isComment ? 14 : 16} />
-						<span>{cast.reactions?.recasts_count || 0}</span>
-					</button>
-					<button
-						onClick={(e) => e.stopPropagation()}
-						className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
-					>
-						<Heart size={isComment ? 14 : 16} />
-						<span>{cast.reactions?.likes_count || 0}</span>
-					</button>
+						<button
+							onClick={(e) => e.stopPropagation()}
+							className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
+						>
+							<ChatCircle size={isComment ? 14 : 16} />
+							<span>{cast.replies?.count || 0}</span>
+						</button>
+						<button
+							onClick={(e) => e.stopPropagation()}
+							className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
+						>
+							<ArrowsClockwise size={isComment ? 14 : 16} />
+							<span>{cast.reactions?.recasts_count || 0}</span>
+						</button>
+						<button
+							onClick={(e) => e.stopPropagation()}
+							className="flex items-center gap-2 hover:text-gray-700 dark:hover:text-neutral-300 transition-colors"
+						>
+							<Heart size={isComment ? 14 : 16} />
+							<span>{cast.reactions?.likes_count || 0}</span>
+						</button>
+					</div>
+					{!isComment && cast.hash && (
+						<a
+							href={`https://warpcast.com/~/conversations/${cast.hash}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(e) => e.stopPropagation()}
+							className="flex items-center gap-2 text-gray-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
+							title="View on Farcaster"
+						>
+							<LinkSimple size={16} />
+						</a>
+					)}
 				</div>
-				{!isComment && cast.hash && (
-					<a
-						href={`https://warpcast.com/~/conversations/${cast.hash}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						onClick={(e) => e.stopPropagation()}
-						className="flex items-center gap-2 text-gray-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm"
-						title="View on Farcaster"
-					>
-						<LinkSimple size={16} />
-					</a>
-				)}
-			</div>
+			)}
 		</div>
 	)
 }

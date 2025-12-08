@@ -122,6 +122,7 @@ export function DeskView({ desk }) {
 						<CastDetailPanel
 							castHash={selectedCastHash}
 							onClose={() => setSelectedCastHash(null)}
+							onCastClick={(castHash) => setSelectedCastHash(castHash)}
 							onUserClick={(userId, userData, username) => {
 								if (username) {
 									setSelectedUsername(username)
