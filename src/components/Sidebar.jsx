@@ -11,7 +11,7 @@ export function Sidebar({
 	isExpanded = true,
 	onToggleExpand,
 }) {
-	const { desks, loading, createDesk, deleteDesk } = useDesks()
+	const { desks, loading, error, createDesk, deleteDesk } = useDesks()
 	const { theme, toggleTheme } = useTheme()
 	const [showCreateDeskModal, setShowCreateDeskModal] = useState(false)
 
@@ -144,6 +144,23 @@ export function Sidebar({
 								}`}
 							>
 								Loading desks...
+								{error && (
+									<div className="mt-2 text-xs text-red-500 dark:text-red-400">
+										Error: {error}
+									</div>
+								)}
+							</div>
+						) : error ? (
+							<div
+								className={`text-red-500 dark:text-red-400 text-sm text-center py-4 ${
+									!isExpanded ? 'hidden' : ''
+								}`}
+							>
+								<div className="font-semibold mb-1">Error loading desks</div>
+								<div className="text-xs">{error}</div>
+								<div className="text-xs mt-2 text-gray-500 dark:text-neutral-500">
+									Check browser console for details
+								</div>
 							</div>
 						) : desks.length === 0 ? (
 							<div
