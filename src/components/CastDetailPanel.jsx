@@ -174,6 +174,46 @@ export function CastDetailPanel({ castHash, onClose, onUserClick }) {
 									Embeds
 								</h3>
 								{cast.embeds.map((embed, idx) => {
+									// Handle cast embeds
+									if (embed.cast) {
+										return (
+											<div
+												key={idx}
+												className="border border-gray-200 dark:border-neutral-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-neutral-800/50"
+											>
+												<CastItem
+													cast={embed.cast}
+													type="comment"
+													onUserClick={onUserClick}
+													showBorder={false}
+													isLast={true}
+												/>
+											</div>
+										)
+									}
+
+									// Handle cast_id references (if cast object not available)
+									if (embed.cast_id) {
+										const castHash = embed.cast_id.hash || embed.cast_id
+										return (
+											<a
+												key={idx}
+												href={`https://warpcast.com/~/conversations/${castHash}`}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="block p-3 bg-gray-50 dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-700 hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors"
+											>
+												<p className="text-blue-600 dark:text-blue-400 text-sm">
+													Embedded Cast
+												</p>
+												<p className="text-xs text-gray-500 dark:text-neutral-500 font-mono mt-1 break-all">
+													{castHash}
+												</p>
+											</a>
+										)
+									}
+
+									// Handle URL embeds
 									if (embed.url) {
 										const isImage = isImageUrl(embed.url)
 
